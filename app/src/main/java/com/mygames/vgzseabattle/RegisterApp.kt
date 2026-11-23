@@ -16,6 +16,7 @@ import com.mygames.vgzseabattle.core.HttpURLConnectionTransport
 import com.mygames.vgzseabattle.core.LoginValidator
 import com.mygames.vgzseabattle.core.ObfuscationCodec
 import com.mygames.vgzseabattle.core.OnlineGateway
+import com.mygames.vgzseabattle.core.RegistrationGate
 
 /**
  * Faithful port of RegisterApp.java + helpers ab/ac/ad/ae/af.
@@ -29,6 +30,15 @@ import com.mygames.vgzseabattle.core.OnlineGateway
  * "Server is not reachable" with an Ok button instead of the misleading
  * "Unknown exception" dialog the dead server produced, and every step is
  * written to the file log.
+ *
+ * NEW v2.2.2 (owner report: "registration misbehaves depending on the online
+ * checkbox"):
+ *  - the Settings online checkbox now gates the Register button. With online
+ *    mode OFF the screen explains how to enable the account system instead of
+ *    silently timing out on the network;
+ *  - while the request is in flight the "sending score" sound plays (a blind
+ *    user previously had NO audio feedback for up to ~20 s), it stops when the
+ *    answer arrives and the error sound plays when the server was unreachable.
  */
 class RegisterApp : Activity(), View.OnTouchListener {
 
@@ -37,6 +47,7 @@ class RegisterApp : Activity(), View.OnTouchListener {
     private lateinit var registerButton: Button
     private lateinit var files: FileStore
     private lateinit var gateway: OnlineGateway
+    private var soundBoard: SoundBoard? = null
 
     private var uid = ""           // d
     private var busy = false       // e
@@ -72,8 +83,14 @@ class RegisterApp : Activity(), View.OnTouchListener {
         registerButton.setOnTouchListener(this)
         busy = false
         fromMenu = intent.action == ACTION_FROM_MENU || GlobalState.menuPhase == 2
-        FileLogger.i(TAG, "registration screen opened (fromMenu=$fromMenu, server=" +
-            Prefs.serverUrl(this) + ")")
+        // v2.2.2: audio feedback for the online request (blind users get no
+        // visual spinner; the sounds are the progress indicator).
+        val sb = SoundBoard(this, 2)
+        soundBoard = sb
+        sb.load(0, R.raw.sound_game_sending_score)
+        sb.load(1, R.raw.sound_game_send_score_error)
+        FileLogger.i(TAG, "registration screen opened (fromMenu=$fromMenu, online=" +
+            Prefs.onlineEnabled(this) + ", server=" + Prefs.serverUrl(this) + ")")
         showHelp()
     }
 
@@ -110,8 +127,35 @@ class RegisterApp : Activity(), View.OnTouchListener {
         }
     }
 
+    /** v2.2.2: "sending" cue while the register.php request is in flight. */
+    private fun playSendingCue() {
+        val sb = soundBoard ?: return
+        val v = sb.volume()
+        FileLogger.i(TAG, "about to play sending-score cue (registration in flight)")
+        sb.playStereo(0, v, v, 1, loop = 1)
+    }
+
+    private fun stopSendingCue() {
+        soundBoard?.stop(0)
+    }
+
+    /** v2.2.2: error cue before the "Server is not reachable" dialog. */
+    private fun playErrorCue() {
+        val sb = soundBoard ?: return
+        val v = sb.volume()
+        FileLogger.i(TAG, "about to play send-score-error cue (server unreachable)")
+        sb.playStereo(1, v, v, 2)
+    }
+
     /** Original b(): build UID from the timestamp, store data0.txt, fire register.php. */
     private fun submitRegistration() {
+        // v2.2.2 GATE: registration is an online feature - the Settings checkbox
+        // controls it. With online mode off, explain instead of timing out.
+        if (!RegistrationGate.allows(Prefs.onlineEnabled(this))) {
+            FileLogger.w(TAG, "register pressed while online mode is off -> guidance dialog")
+            dialog(RegistrationGate.OFFLINE_TITLE, RegistrationGate.OFFLINE_BODY)
+            return
+        }
         val candidate = loginField.text.toString()
         if (!validate(candidate)) return
         login = candidate
@@ -127,6 +171,7 @@ class RegisterApp : Activity(), View.OnTouchListener {
             ObfuscationCodec.digitify(ObfuscationCodec.splice(androidId, uid)) + build
         busy = true
         FileLogger.i(TAG, "registering login '$login' with uid $uid")
+        playSendingCue()
         Thread {
             val result = gateway.register(checkString, login)
             response = result.body
@@ -166,7 +211,9 @@ class RegisterApp : Activity(), View.OnTouchListener {
 
     /** Original d(): handle register.php response. */
     private fun onRegisterResponse() {
+        stopSendingCue()
         if (transportFailed(response, transportError)) {
+            playErrorCue()
             serverUnreachableDialog()
             return
         }
@@ -197,7 +244,9 @@ class RegisterApp : Activity(), View.OnTouchListener {
 
     /** Original f(): handle get_next_page.php response. */
     private fun onNextPageResponse() {
+        stopSendingCue()
         if (transportFailed(response, transportError)) {
+            playErrorCue()
             serverUnreachableDialog()
             return
         }
@@ -234,7 +283,15 @@ class RegisterApp : Activity(), View.OnTouchListener {
             GlobalState.quitRequested = 1
             finish()
         }
+        stopSendingCue()
         super.onStop()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        soundBoard?.stopAll(2)
+        soundBoard?.release()
+        soundBoard = null
     }
 
     override fun onTouch(view: View?, event: MotionEvent?): Boolean {

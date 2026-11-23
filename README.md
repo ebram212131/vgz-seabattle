@@ -10,13 +10,19 @@ and all decompiled reference sources used for the port.
 > service no longer exists. The decompiled code and the original APK are kept
 > for reference only. Rights holders can request removal via an issue.
 
-## Features of the port (v2.1, versionCode 4)
+## Features of the port (v2.2.2, versionCode 9)
 
 - 100% Kotlin, no game-rule drift: scoring (+20 hit, +100 sink, −10 damaged,
   −50 own sunk), fleet `[4,3,3,2,2,2,1,1,1,1]`, AI focus/scan logic — every rule
   re-checked against the decompiled code (see [VERIFICATION.md](VERIFICATION.md)).
 - Optional online account system (off by default) with a configurable server
   address in Settings; the game is fully playable offline.
+- **Register honors the online checkbox (v2.2.2)**: with online mode off the
+  Register screen explains how to enable the account system instead of timing
+  out in silence; with online mode on the request shows an audible
+  "sending" cue and an error cue if the server is unreachable.
+- **TalkBack friendly**: real focusable buttons (double-tap to activate),
+  audio-first feedback, no redundant screen-reader announcements.
 - **Crash-safe networking**: the original crashed when its server died
   (`NetworkOnMainThreadException` in the splash flow). This port runs all
   network I/O on worker threads and reports **"Server is not reachable"** with
@@ -32,7 +38,7 @@ and all decompiled reference sources used for the port.
 - Login flow identical to the decompiled original: same validation dialogs,
   same protocol codes (`1` login expected, `2` user id expected, `3` taken,
   `1000` ok), same data0/data1 files, same obfuscated redirects.
-- 90 unit tests (`:app:testDebugUnitTest`), all green.
+- 93 unit tests (`:app:testDebugUnitTest`), all green.
 
 ## Repository layout
 
@@ -67,8 +73,12 @@ Requirements: JDK 17+, Android SDK 35 (Gradle wrapper downloads Gradle 9.9.2).
 ```
 
 Release signing: place a PKCS12 keystore at `keystore/vgz-release.jks`
-(alias `vgzseabattle`) and optionally set `vgz.storePassword` / `vgz.keyPassword`
-in `gradle.properties`. Without a keystore the release build assembles unsigned.
+(alias `vgzseabattle`) with the passwords in `keystore/keystore-info.txt`
+(`keyAlias=…`, `storePassword=…`, `keyPassword=…`) or pass
+`-Pvgz.storePassword` / `-Pvgz.keyPassword` on the Gradle command line.
+Neither the keystore nor the passwords are committed. The v2.2.2 keystore is
+Google-Play compliant (RSA-2048, validity until 2056; use it as the Play App
+Signing upload key). Without a keystore the release build assembles unsigned.
 (The owner's signing key is kept private — releases on this repo are signed by
 the owner and attached to GitHub Releases.)
 
@@ -97,7 +107,10 @@ Full details and the obfuscation math: [SERVER.md](SERVER.md).
 ## Releases
 
 Signed APKs are attached to [GitHub Releases](../../releases):
-`VGZ-SeaBattle-2.1-release-signed.apk` (install this one) and a debug build.
+`VGZ-SeaBattle-2.2.2-release-signed.apk` (install this one) and a debug build.
+Note: v2.2.2 ships a NEW signing key (Play-compliant). If a v2.2.1-or-older
+build is installed, uninstall it first — Android refuses an update signed with
+a different key.
 
 ## License
 

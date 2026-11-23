@@ -59,8 +59,12 @@ class HttpURLConnectionTransport : HttpTransport {
             val conn = java.net.URL(url).openConnection() as java.net.HttpURLConnection
             conn.requestMethod = "POST"
             conn.doOutput = true
-            conn.connectTimeout = 5000
-            conn.readTimeout = 10000
+            // v2.2.2: tighter timeouts. The old 5s/10s pair meant a dead server
+            // kept a blind user in total silence for up to ~30 s (two schemes).
+            // 4 s connect + 8 s read keeps the worst case near ~12 s while still
+            // tolerating slow mobile networks.
+            conn.connectTimeout = 4000
+            conn.readTimeout = 8000
             val body = params.joinToString("&") { (k, v) ->
                 java.net.URLEncoder.encode(k, "UTF-8") + "=" + java.net.URLEncoder.encode(v, "UTF-8")
             }

@@ -11,8 +11,7 @@
         android:id="@id/switchOnline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/settings_online"
-        android:contentDescription="@string/settings_online" />
+        android:text="@string/settings_online" />
     <TextView
         android:id="@id/textOnline"
         android:layout_width="match_parent"

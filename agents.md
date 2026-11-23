@@ -76,25 +76,69 @@ work/                        ← reverse-engineering evidence (READ-ONLY inputs,
 ## Build & test (exact commands)
 
 ```bash
-JDK=/home/z/my-project/tools/jdk-21.0.13.1+2
-GRADLE=/home/z/my-project/tools/gradle-dist/gradle-9.9.2/bin/gradle
+# Sandbox toolchain (re-create with scripts/setup_env.sh if the sandbox was recycled)
+JDK=/home/z/my-project/tools/jdk-21
+GRADLE=/home/z/my-project/tools/gradle-9.9.2/bin/gradle
+SDK=/home/z/my-project/tools/android-sdk
 cd /home/z/my-project/vgz-seabattle
 
 # unit tests (AGP 9 has no testReleaseUnitTest; only debug variant exists)
 JAVA_HOME=$JDK $GRADLE --no-daemon :app:testDebugUnitTest
 
 # signed release APK  → app/build/outputs/apk/release/app-release.apk
+# (signing password comes from keystore/keystore-info.txt, git-ignored)
 JAVA_HOME=$JDK $GRADLE --no-daemon :app:assembleRelease
 
 # verify signature
-/home/z/my-project/tools/android-sdk/build-tools/35.0.0/apksigner \
-  verify --print-certs app/build/outputs/apk/release/app-release.apk
+$SDK/build-tools/35.0.0/apksigner verify --print-certs \
+  app/build/outputs/apk/release/app-release.apk
 ```
 
 - Gradle wrapper is pinned to **9.9.2** (`gradle/wrapper/gradle-wrapper.properties`).
-- Signing: `keystore/vgz-release.jks`, alias `vgzseabattle`,
-  store/key password `vgzseabattle2026` (PKCS12, RSA-2048, valid 30 years).
-- Keep `JAVA_HOME` on the full JDK (the system `java` is a bare JRE without `javac`).
+- Signing: `keystore/vgz-release.jks`, alias `vgzseabattle` (PKCS12, RSA-2048,
+  valid 10950 days = until 2056). **Passwords are NOT in the repo** and NOT
+  hardcoded in `app/build.gradle.kts` anymore: the build reads them from the
+  git-ignored `keystore/keystore-info.txt` (keyAlias / storePassword /
+  keyPassword lines) or from `-Pvgz.storePassword=…` / `-Pvgz.keyPassword=…`.
+  A backup copy for the owner lives in the sandbox `download/keystore-backup/`.
+- Keep `JAVA_HOME` on a full JDK (Debian's system `java` is a bare JRE without
+  `javac`; scripts/setup_env.sh installs Temurin 21 into `tools/jdk-21`).
+
+## Google Play signing notes (v2.2.2)
+
+- The keystore created for v2.2.2 satisfies Play's upload-key rules:
+  RSA-2048, validity until 2056 (> Play's 2033-10-22 minimum), PKCS12.
+- Enroll in **Play App Signing** and upload the AAB/APK signed with this key;
+  keep `vgz-release.jks` + `keystore-info.txt` backed up privately — losing
+  them means a Play-side key reset.
+- Before a Play submission, bump `targetSdk` to the current Play requirement
+  (35 is accepted for updates in 2026) and re-run the full test suite.
+
+## Version history
+
+| Version | Code | What changed |
+|---------|------|--------------|
+| 2.1     | 4    | Initial Kotlin port + PHP/SQLite3 server |
+| 2.1.1   | 5    | Sound-play crash fix + bulletproof logging |
+| 2.1.2   | 6    | ActivityNotFoundException fix (Android 14+/16 implicit intents) |
+| 2.2.0   | 7    | Menu buttons open screens offline-first (no server round-trip) |
+| 2.2.1-diag | 8 | Diagnostic-only build (never committed; extra window-inset logs). Confirmed healthy layout on Android 16 / SM-S721B. |
+| 2.2.2   | 9    | Register gated by the Settings online checkbox (+ audio cues), tighter HTTP timeouts, TalkBack tweaks, NEW Play-compliant release keystore |
+
+## TalkBack / accessibility ground rules (owner requirement)
+
+The owner uses the game with TalkBack — every change must keep it working:
+
+1. Buttons stay real focusable/clickable views; TalkBack double-tap must fire
+   the same action as the touch handler (`OnTouchListener` handles ACTION_DOWN,
+   which TalkBack's double-tap click satisfies).
+2. Never replace the audio-first UX with visual-only indicators; long network
+   waits must have an audible cue (v2.2.2 added the sending/error cues to
+   RegisterApp).
+3. Do not add duplicate `contentDescription` that repeats `android:text` (it
+   makes TalkBack announce everything twice); prefer `hint` on EditTexts.
+4. Dialogs (help, errors, unreachable server) must keep an Ok button reachable
+   by TalkBack focus order.
 
 ## Ground rules for agents
 
@@ -104,7 +148,7 @@ JAVA_HOME=$JDK $GRADLE --no-daemon :app:assembleRelease
 2. The rules verified so far are listed in `VERIFICATION.md` — keep that table
    up to date whenever you touch `SeaBattleEngine.kt` or `ObfuscationCodec.kt`.
 3. Every behavior-level change needs a test in `app/src/test/`. The suite must
-   stay green (`90/90` at the time of writing) and `server/selftest.php` must
+   stay green (`93/93` since v2.2.2) and `server/selftest.php` must
    stay green too (`33/33`).
 4. Keep `core/` free of `android.*` imports — it must stay plain-JVM testable.
 5. Response codes of the registration protocol are part of the contract:
@@ -116,4 +160,7 @@ JAVA_HOME=$JDK $GRADLE --no-daemon :app:assembleRelease
    original crash was a `NetworkOnMainThreadException` in the splash verify step.
 8. Never write the keystore passwords or the server admin token into files that
    end up in the public repo (`keystore/` is git-ignored; `server/config.php`
-   ships with a placeholder token).
+   ships with a placeholder token; the signing build reads
+   `keystore/keystore-info.txt` at build time).
+9. Respect the TalkBack ground rules section above — the owner plays this game
+   with TalkBack, and accessibility regressions are release blockers.

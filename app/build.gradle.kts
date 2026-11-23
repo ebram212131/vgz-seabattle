@@ -10,22 +10,31 @@ android {
         applicationId = "com.mygames.vgzseabattle"
         minSdk = 21
         targetSdk = 35
-        versionCode = 7
-        versionName = "2.2.0"
+        versionCode = 9
+        versionName = "2.2.2"
     }
 
     // Release signing is applied only when the keystore exists (it is NOT part
-    // of the public repo). Locally: keystore/vgz-release.jks with the owner's
-    // passwords (PKCS12, alias vgzseabattle). Without a keystore the release
-    // build still assembles, just unsigned - see README.
+    // of the public repo). Passwords are NEVER hardcoded here (v2.2.2 removed
+    // the old committed fallback): they come from -Pvgz.storePassword/-Pvgz
+    // .keyPassword or from the git-ignored keystore/keystore-info.txt file
+    // that travels with the keystore (see agents.md).
     signingConfigs {
         val ks = rootProject.file("keystore/vgz-release.jks")
+        val info = rootProject.file("keystore/keystore-info.txt")
+        fun ksValue(key: String, override: String?): String? =
+            override ?: info.takeIf { it.exists() }?.readLines()
+                ?.firstOrNull { it.trim().startsWith("$key=") }
+                ?.substringAfter('=')?.trim()
+
         if (ks.exists()) {
             create("release") {
                 storeFile = ks
-                storePassword = (project.findProperty("vgz.storePassword") as String?) ?: "vgzseabattle2026"
-                keyAlias = "vgzseabattle"
-                keyPassword = (project.findProperty("vgz.keyPassword") as String?) ?: "vgzseabattle2026"
+                storePassword = ksValue("storePassword", project.findProperty("vgz.storePassword") as String?)
+                    ?: error("Release keystore found but no password: set vgz.storePassword in keystore/keystore-info.txt or pass -Pvgz.storePassword")
+                keyAlias = ksValue("keyAlias", project.findProperty("vgz.keyAlias") as String?) ?: "vgzseabattle"
+                keyPassword = ksValue("keyPassword", project.findProperty("vgz.keyPassword") as String?)
+                    ?: ksValue("storePassword", null)
             }
         }
     }
