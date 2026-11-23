@@ -10,20 +10,29 @@ import android.widget.Button
 import android.widget.RelativeLayout
 import com.mygames.vgzseabattle.core.GlobalState
 import com.mygames.vgzseabattle.core.HttpURLConnectionTransport
-import com.mygames.vgzseabattle.core.ObfuscationCodec
 import com.mygames.vgzseabattle.core.OnlineGateway
 
 /**
  * Faithful port of ActivityMenu.java + helpers i/j/k/l (menu adapter and threads).
  * Evidence: work/rea-evidence/ActivityMenu.java.txt, i/j/k/l.java.txt.
  *
- * Original design note: the four activity-launching buttons asked the server for
- * the next action ("1000*seed*encoded"). In this port the launch works offline:
- * when online mode is off or the server does not answer, the original action
- * constants are used directly. With online mode on, the server flow is kept.
+ * ARCHITECTURE (owner requirement, v2.2.0): the menu and every game/learn screen
+ * runs ENTIRELY on the device - offline and synchronous. Touching Start Game /
+ * Learn Sounds / Learn Screen / Top 10 / Test Headsets / Final Score / Settings /
+ * Quit opens the next screen immediately with a direct, explicit startActivity
+ * (no server round-trip, no background thread, no check-string). Only the three
+ * genuinely server-backed features use the network:
+ *   - Send Score  -> gateway.submitScore (returns the player's rank)
+ *   - Register    -> RegisterApp -> gateway.register / get_next_page
+ *   - "score list" = the rank returned by submitScore (the original server
+ *     protocol never streamed a top-10 table; TopScoresHolder stays local)
  *
  * PRODUCT ADDITION: a "Settings" button (buttonSettings) opens SettingsActivity
  * where online mode and the custom server URL are configured.
+ *
+ * DIAGNOSTICS: every ACTION_DOWN is logged with the touched view, and every
+ * action method logs its entry, so a device log immediately shows whether a
+ * button tap reached the handler and which step followed.
  */
 class ActivityMenu : Activity(), View.OnTouchListener {
 
@@ -61,8 +70,6 @@ class ActivityMenu : Activity(), View.OnTouchListener {
     private var scoreSendPending = false     // s
     private var musicPauseOnce = false       // t
     private var pauseCounter = 0             // u
-    private var checkString = ""             // v
-    private var nextActionIndex = 1          // w
 
     private var timer: java.util.Timer? = null
 
@@ -225,47 +232,72 @@ class ActivityMenu : Activity(), View.OnTouchListener {
         for (i in 0..8) sound?.stop(i)
     }
 
-    /** Original h(): start game. */
+    /**
+     * Offline, synchronous navigation to an in-app screen. v2.2.0: the menu and
+     * every game/learn screen opens directly on the device - no server call, no
+     * background thread, no check-string. Logs the target so the device log
+     * shows exactly which screen was opened and when.
+     */
+    private fun goOffline(action: String) {
+        FileLogger.i(TAG, "opening screen offline: $action")
+        try {
+            startActivity(Nav.intent(this, action))
+        } catch (t: Throwable) {
+            FileLogger.e(TAG, "failed to open $action", t)
+        }
+    }
+
+    /** Original h(): start game. Offline on device. */
     private fun startGame() {
+        FileLogger.i(TAG, "-> startGame")
         stopBackgroundMusic()
         pressSound()
         GlobalState.menuPhase = 2
-        launchNextActivity(1)
+        goOffline(ACTION_GAME_SCREEN)
     }
 
-    /** Original i(): test headsets. */
+    /** Original i(): test headsets. Local stereo sound test. */
     private fun testHeadsets() {
+        FileLogger.i(TAG, "-> testHeadsets")
         pressSound()
         headsetTestActive = true
         headsetStep = 0
     }
 
-    /** Original m(): learn game sounds. */
+    /** Original m(): learn game sounds. Offline on device. */
     private fun learnSounds() {
+        FileLogger.i(TAG, "-> learnSounds")
         stopBackgroundMusic()
         pressSound()
         GlobalState.menuPhase = 2
-        launchNextActivity(2)
+        goOffline(ACTION_LEARN_SOUNDS)
     }
 
-    /** Original n(): learn game screen. */
+    /** Original n(): learn game screen. Offline on device. */
     private fun learnScreen() {
+        FileLogger.i(TAG, "-> learnScreen")
         stopBackgroundMusic()
         pressSound()
         GlobalState.menuPhase = 2
-        launchNextActivity(3)
+        goOffline(ACTION_LEARN_SCREEN)
     }
 
-    /** Original o(): final score speech. */
+    /** Original o(): final score speech. Local TTS. */
     private fun finalScore() {
+        FileLogger.i(TAG, "-> finalScore")
         stopBackgroundMusic()
         pressSound()
         speaker.speakFinalScore(false)
         scoreSendPending = true
     }
 
-    /** Original p(): send score. */
+    /**
+     * Original p(): send score. ONLINE - submits the last score to the server via
+     * a background thread (gateway.submitScore) and plays the rank result sound.
+     * Does not block the UI; the menu stays responsive.
+     */
     private fun sendScore() {
+        FileLogger.i(TAG, "-> sendScore (online)")
         stopBackgroundMusic()
         pressSound()
         if (GlobalState.lastScore == 0) {
@@ -275,31 +307,45 @@ class ActivityMenu : Activity(), View.OnTouchListener {
         }
     }
 
-    /** Original r(): top 10 screen. */
+    /**
+     * Original r(): top 10 screen. Offline on device - opens ActivityViewTop,
+     * which reads the locally-stored top scores. (The server protocol returns a
+     * player's rank from submitScore, not a streamed table; that rank is spoken
+     * by sendScore above.)
+     */
     private fun viewTop10() {
+        FileLogger.i(TAG, "-> viewTop10")
         stopBackgroundMusic()
         pressSound()
         GlobalState.menuPhase = 2
-        launchNextActivity(4)
+        goOffline(ACTION_VIEW_TOP)
     }
 
-    /** NEW: optional-account registration entry. */
+    /** NEW: optional-account registration entry. RegisterApp does the online work. */
     private fun openRegister() {
+        FileLogger.i(TAG, "-> openRegister (online in RegisterApp)")
         pressSound()
         GlobalState.menuPhase = 2
         val intent = Intent(this, RegisterApp::class.java)
         intent.action = RegisterApp.ACTION_FROM_MENU
-        startActivity(intent)
+        try {
+            startActivity(intent)
+        } catch (t: Throwable) {
+            FileLogger.e(TAG, "failed to open RegisterApp", t)
+        }
     }
 
-    /** NEW: settings entry. */
+    /** NEW: settings entry. Offline, local configuration screen. */
     private fun openSettings() {
+        FileLogger.i(TAG, "-> openSettings")
         pressSound()
-        startActivity(Nav.intent(this, ACTION_SETTINGS))
+        GlobalState.menuPhase = 2
+        goOffline(ACTION_SETTINGS)
     }
 
     /** Original s(): quit. */
     private fun quitGame() {
+        FileLogger.i(TAG, "-> quitGame")
         stopBackgroundMusic()
         pressSound()
         GlobalState.quitRequested = 1
@@ -311,61 +357,16 @@ class ActivityMenu : Activity(), View.OnTouchListener {
         sound?.stop(0)
     }
 
-    /** Original u(): compute the server check string. */
-    private fun computeCheckString() {
-        val seed = files.readAll("data0.txt")
-        val imeiLike = DeviceIdentity.imeiAndSim(this)
-        val androidId = DeviceIdentity.androidId(this)
-        val build = DeviceIdentity.buildFingerprint()
-        checkString = seed +
-            ObfuscationCodec.digitify(ObfuscationCodec.splice(imeiLike, seed)) +
-            ObfuscationCodec.digitify(ObfuscationCodec.splice(androidId, seed)) + build
-    }
-
-    /**
-     * Original b(int) + k.java: ask the server for the next activity, falling back
-     * to the built-in action constants when offline mode is on or the call fails.
-     */
-    private fun launchNextActivity(which: Int) {
-        nextActionIndex = which
-        computeCheckString()
-        if (!Prefs.onlineEnabled(this)) {
-            startActivity(Nav.intent(this, localActionFor(which)))
-            return
-        }
-        Thread {
-            val result = gateway.getNextPage(checkString)
-            val response = result.body
-            if (result.ok && response.contains("1000*")) {
-                val clean = response.replace("1000*", "")
-                val split = clean.split("\\*".toRegex())
-                if (split.size >= nextActionIndex + 2) {
-                    val action = ObfuscationCodec.decodeAction(
-                        nextActionIndex, split[0], split[nextActionIndex + 1]
-                    )
-                    runOnUiThread { startActivity(Nav.intent(this@ActivityMenu, action)) }
-                    return@Thread
-                }
-            } else if (!result.ok) {
-                FileLogger.w(TAG, "get_next_page failed, using local action: ${result.error}")
-            }
-            runOnUiThread { startActivity(Nav.intent(this@ActivityMenu, localActionFor(nextActionIndex))) }
-        }.start()
-    }
-
-    /** Offline mapping of the original server-provided actions. */
-    private fun localActionFor(which: Int): String = when (which) {
-        1 -> ACTION_GAME_SCREEN
-        2 -> ACTION_LEARN_SOUNDS
-        3 -> ACTION_LEARN_SCREEN
-        4 -> ACTION_VIEW_TOP
-        else -> ACTION_GAME_SCREEN
-    }
-
     private inner class SendScoreTask : Runnable {
         override fun run() {
             val sb = sound ?: return
-            val uid = files.readAll("data1.txt").split("\\*".toRegex())[0]
+            val uid = try {
+                files.readAll("data1.txt").split("\\*".toRegex())[0]
+            } catch (t: Throwable) {
+                FileLogger.e(TAG, "sendScore: no stored user id, aborting", t)
+                playMenuSound(8)
+                return
+            }
             playMenuSound(5)     // sending...
             musicPauseOnce = true
             pauseCounter = 0
@@ -396,7 +397,7 @@ class ActivityMenu : Activity(), View.OnTouchListener {
             Prefs.preferredScheme(this)
         ) { message -> FileLogger.i(TAG, message) }
         rowHeight = (getSystemService(WINDOW_SERVICE) as WindowManager)
-            .defaultDisplay.height / 9
+            .defaultDisplay.height / 11
         window.addFlags(1024)
         setContentView(R.layout.activity_menu)
         setVolumeControlStream(3)
@@ -411,6 +412,7 @@ class ActivityMenu : Activity(), View.OnTouchListener {
         }
         scoreSendPending = false
         pauseCounter = 0
+        FileLogger.i(TAG, "menu ready, rowHeight=$rowHeight, online=${Prefs.onlineEnabled(this)}")
     }
 
     override fun onDestroy() {
@@ -449,10 +451,31 @@ class ActivityMenu : Activity(), View.OnTouchListener {
     }
 
     override fun onTouch(view: View?, event: MotionEvent?): Boolean {
+        val action = event?.actionMasked ?: -1
+        // DIAGNOSTIC: log every DOWN so the device log shows whether a tap reached
+        // the handler and which view was under the finger.
+        if (action == MotionEvent.ACTION_DOWN) {
+            val label = when (view) {
+                buttonStart -> "StartGame"
+                buttonHeadsets -> "TestHeadsets"
+                buttonLearnSounds -> "LearnSounds"
+                buttonLearnScreen -> "LearnScreen"
+                buttonFinalScore -> "FinalScore"
+                buttonSendScore -> "SendScore"
+                buttonTop10 -> "Top10"
+                buttonRegister -> "Register"
+                buttonSettings -> "Settings"
+                buttonQuit -> "Quit"
+                layout -> "Layout(background)"
+                null -> "null"
+                else -> view.javaClass.simpleName
+            }
+            FileLogger.i(TAG, "onTouch DOWN on [$label] headsetTestActive=$headsetTestActive")
+        }
         if (headsetTestActive) {
             return true
         }
-        val down = event?.actionMasked == MotionEvent.ACTION_DOWN
+        val down = action == MotionEvent.ACTION_DOWN
         if (view === layout) {
             onBackgroundTouch(event!!)
         }
