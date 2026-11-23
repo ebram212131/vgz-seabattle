@@ -33,6 +33,18 @@ import com.mygames.vgzseabattle.core.OnlineGateway
  * DIAGNOSTICS: every ACTION_DOWN is logged with the touched view, and every
  * action method logs its entry, so a device log immediately shows whether a
  * button tap reached the handler and which step followed.
+ *
+ * TALKBACK FIX (v2.2.3, owner report: "menus do not open with TalkBack clicks"):
+ * TalkBack does NOT deliver the double-tap as a MotionEvent to the app. The
+ * double-tap is translated into the accessibility action ACTION_CLICK, which
+ * the framework routes to View.performClick() - and an OnTouchListener alone
+ * is NEVER called through that path. Buttons that only set an OnTouchListener
+ * (firing on ACTION_DOWN) therefore did nothing under TalkBack: focus moved,
+ * the app announced the button, but the double-tap performed no action. Fix:
+ * every menu button ALSO gets an OnClickListener that runs the exact same
+ * action method. Real touches keep the original instant ACTION_DOWN response
+ * (the OnTouchListener consumes the event, so the click listener is not
+ * double-fired); TalkBack double-taps go through performClick() and now work.
  */
 class ActivityMenu : Activity(), View.OnTouchListener {
 
@@ -89,7 +101,11 @@ class ActivityMenu : Activity(), View.OnTouchListener {
             buttonStart, buttonHeadsets, buttonLearnSounds, buttonLearnScreen,
             buttonFinalScore, buttonSendScore, buttonTop10, buttonRegister,
             buttonSettings, buttonQuit
-        ).forEach { it?.setOnTouchListener(this) }
+        ).forEach {
+            it?.setOnTouchListener(this)
+            // v2.2.3 TalkBack fix: double-tap fires ACTION_CLICK -> performClick().
+            it?.setOnClickListener { v -> activate(v) }
+        }
         layout.setOnTouchListener(this)
         listOf(
             buttonStart, buttonHeadsets, buttonLearnSounds, buttonLearnScreen,
@@ -480,20 +496,31 @@ class ActivityMenu : Activity(), View.OnTouchListener {
             onBackgroundTouch(event!!)
         }
         if (down) {
-            when (view) {
-                buttonStart -> startGame()
-                buttonHeadsets -> testHeadsets()
-                buttonLearnSounds -> learnSounds()
-                buttonLearnScreen -> learnScreen()
-                buttonFinalScore -> finalScore()
-                buttonSendScore -> sendScore()
-                buttonTop10 -> viewTop10()
-                buttonRegister -> openRegister()
-                buttonSettings -> openSettings()
-                buttonQuit -> quitGame()
-            }
+            activate(view)
         }
         return true
+    }
+
+    /**
+     * v2.2.3 TalkBack fix: single dispatcher shared by the OnTouchListener
+     * (direct touch, ACTION_DOWN) and the OnClickListener (TalkBack double-tap
+     * -> ACTION_CLICK -> performClick()). Both paths run the identical action
+     * exactly once.
+     */
+    private fun activate(view: View?) {
+        if (headsetTestActive) return
+        when (view) {
+            buttonStart -> startGame()
+            buttonHeadsets -> testHeadsets()
+            buttonLearnSounds -> learnSounds()
+            buttonLearnScreen -> learnScreen()
+            buttonFinalScore -> finalScore()
+            buttonSendScore -> sendScore()
+            buttonTop10 -> viewTop10()
+            buttonRegister -> openRegister()
+            buttonSettings -> openSettings()
+            buttonQuit -> quitGame()
+        }
     }
 
     companion object {

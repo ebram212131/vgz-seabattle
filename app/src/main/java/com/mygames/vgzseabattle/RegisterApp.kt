@@ -81,6 +81,10 @@ class RegisterApp : Activity(), View.OnTouchListener {
         loginField = findViewById(R.id.editTextLogin)
         registerButton = findViewById(R.id.buttonRegister)
         registerButton.setOnTouchListener(this)
+        // v2.2.3 TalkBack fix: the double-tap performs ACTION_CLICK ->
+        // performClick(); without an OnClickListener the Register button was
+        // dead under TalkBack.
+        registerButton.setOnClickListener { activateRegister() }
         busy = false
         fromMenu = intent.action == ACTION_FROM_MENU || GlobalState.menuPhase == 2
         // v2.2.2: audio feedback for the online request (blind users get no
@@ -294,10 +298,26 @@ class RegisterApp : Activity(), View.OnTouchListener {
         soundBoard = null
     }
 
+    /**
+     * v2.2.3 TalkBack fix: single dispatcher shared by the OnTouchListener
+     * (direct touch, ACTION_DOWN) and the OnClickListener (TalkBack double-tap
+     * -> ACTION_CLICK -> performClick()). The busy guard prevents a second
+     * submission while a request/dialog is already in flight.
+     */
+    private fun activateRegister() {
+        if (busy) return
+        submitRegistration()
+    }
+
     override fun onTouch(view: View?, event: MotionEvent?): Boolean {
-        if (view === registerButton && event?.actionMasked == MotionEvent.ACTION_DOWN) {
-            if (busy) return true
-            submitRegistration()
+        if (view === registerButton) {
+            if (event?.actionMasked == MotionEvent.ACTION_DOWN) {
+                activateRegister()
+            }
+            // Consume the event: returning false would let the Button
+            // synthesize a click on ACTION_UP and double-fire now that an
+            // OnClickListener handles the TalkBack double-tap path.
+            return true
         }
         return false
     }

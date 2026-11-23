@@ -124,14 +124,30 @@ $SDK/build-tools/35.0.0/apksigner verify --print-certs \
 | 2.2.0   | 7    | Menu buttons open screens offline-first (no server round-trip) |
 | 2.2.1-diag | 8 | Diagnostic-only build (never committed; extra window-inset logs). Confirmed healthy layout on Android 16 / SM-S721B. |
 | 2.2.2   | 9    | Register gated by the Settings online checkbox (+ audio cues), tighter HTTP timeouts, TalkBack tweaks, NEW Play-compliant release keystore |
+| 2.2.3   | 10   | THE TalkBack fix: menus/game grid/settings/register buttons now respond to TalkBack double-tap (every interactive view got an OnClickListener; onTouch consumes events to prevent double-fire) |
 
 ## TalkBack / accessibility ground rules (owner requirement)
 
 The owner uses the game with TalkBack — every change must keep it working:
 
-1. Buttons stay real focusable/clickable views; TalkBack double-tap must fire
-   the same action as the touch handler (`OnTouchListener` handles ACTION_DOWN,
-   which TalkBack's double-tap click satisfies).
+1. **CRITICAL (v2.2.3, owner report "menus do not open with TalkBack clicks"):**
+   TalkBack's double-tap does NOT deliver a MotionEvent to the app — it performs
+   the accessibility action `ACTION_CLICK`, which the framework routes to
+   `View.performClick()`. An `OnTouchListener` that fires on `ACTION_DOWN` is
+   NEVER invoked through that path, so views with only a touch listener are
+   DEAD under TalkBack. The mandatory pattern for every interactive view:
+      - set BOTH `OnTouchListener` (instant ACTION_DOWN feedback for direct
+        touches) AND an `OnClickListener` that calls the SAME action method
+        (TalkBack double-tap path),
+      - the `OnTouchListener` must RETURN TRUE (consume) — returning false
+        would let the View synthesize a click on ACTION_UP and double-fire the
+        action now that a click listener exists,
+      - shared guards (busy/locks/speaking) must live inside the common action
+        method, not only in the touch handler.
+   Implemented in ActivityMenu (10 buttons), ActivityGameScreen (menu button +
+   100 grid cells), ActivityLearnSounds (10), ActivityLearnScreen (menu),
+   ActivityViewTop (11), RegisterApp (register button, `busy` guard) and
+   SettingsActivity (save button).
 2. Never replace the audio-first UX with visual-only indicators; long network
    waits must have an audible cue (v2.2.2 added the sending/error cues to
    RegisterApp).
@@ -139,6 +155,11 @@ The owner uses the game with TalkBack — every change must keep it working:
    makes TalkBack announce everything twice); prefer `hint` on EditTexts.
 4. Dialogs (help, errors, unreachable server) must keep an Ok button reachable
    by TalkBack focus order.
+5. Testing note: the sandbox has no `/dev/kvm` and not enough free disk for the
+   Android emulator (QEMU), so TalkBack itself cannot be run here. The
+   TalkBack-equivalent activation path (`performClick`) is the one exercised by
+   the OnClickListener added in v2.2.3; on-device verification happens with the
+   owner's real TalkBack session and the app's file logs.
 
 ## Ground rules for agents
 

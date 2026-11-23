@@ -30,29 +30,47 @@ class SettingsActivity : Activity(), View.OnTouchListener {
         serverField = findViewById(R.id.editTextServerUrl)
         saveButton = findViewById(R.id.buttonSaveSettings)
         saveButton.setOnTouchListener(this)
+        // v2.2.3 TalkBack fix: double-tap fires ACTION_CLICK -> performClick();
+        // without an OnClickListener the Save button was dead under TalkBack.
+        saveButton.setOnClickListener { saveSettings() }
         onlineSwitch.isChecked = Prefs.onlineEnabled(this)
         serverField.setText(Prefs.serverUrl(this))
     }
 
+    /**
+     * v2.2.3 TalkBack fix: single dispatcher shared by the OnTouchListener
+     * (direct touch, ACTION_DOWN) and the OnClickListener (TalkBack double-tap
+     * -> ACTION_CLICK -> performClick()).
+     */
+    private fun saveSettings() {
+        Prefs.setOnlineEnabled(this, onlineSwitch.isChecked)
+        val url = serverField.text.toString().trim()
+        if (url.isEmpty()) {
+            Prefs.setServerUrl(this, Prefs.DEFAULT_SERVER)
+        } else {
+            Prefs.setServerUrl(this, url)
+        }
+        FileLogger.i(TAG, "settings saved: online=" + Prefs.onlineEnabled(this) +
+            " server=" + Prefs.serverUrl(this))
+        // Owner request: point the user at the log folder inside
+        // Android/data/<package name> so crashes can be reported and fixed.
+        Toast.makeText(
+            this,
+            getString(R.string.settings_saved) + "\n" + FileLogger.logPath(),
+            Toast.LENGTH_LONG
+        ).show()
+        finish()
+    }
+
     override fun onTouch(view: View?, event: MotionEvent?): Boolean {
-        if (view === saveButton && event?.actionMasked == MotionEvent.ACTION_DOWN) {
-            Prefs.setOnlineEnabled(this, onlineSwitch.isChecked)
-            val url = serverField.text.toString().trim()
-            if (url.isEmpty()) {
-                Prefs.setServerUrl(this, Prefs.DEFAULT_SERVER)
-            } else {
-                Prefs.setServerUrl(this, url)
+        if (view === saveButton) {
+            if (event?.actionMasked == MotionEvent.ACTION_DOWN) {
+                saveSettings()
             }
-            FileLogger.i(TAG, "settings saved: online=" + Prefs.onlineEnabled(this) +
-                " server=" + Prefs.serverUrl(this))
-            // Owner request: point the user at the log folder inside
-            // Android/data/<package name> so crashes can be reported and fixed.
-            Toast.makeText(
-                this,
-                getString(R.string.settings_saved) + "\n" + FileLogger.logPath(),
-                Toast.LENGTH_LONG
-            ).show()
-            finish()
+            // Consume the event: returning false would let the Button
+            // synthesize a click on ACTION_UP and double-fire now that an
+            // OnClickListener handles the TalkBack double-tap path.
+            return true
         }
         return false
     }

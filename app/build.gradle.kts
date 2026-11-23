@@ -10,8 +10,8 @@ android {
         applicationId = "com.mygames.vgzseabattle"
         minSdk = 21
         targetSdk = 35
-        versionCode = 9
-        versionName = "2.2.2"
+        versionCode = 10
+        versionName = "2.2.3"
     }
 
     // Release signing is applied only when the keystore exists (it is NOT part

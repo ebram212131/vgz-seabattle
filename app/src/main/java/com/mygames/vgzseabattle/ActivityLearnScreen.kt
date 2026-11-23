@@ -26,6 +26,8 @@ class ActivityLearnScreen : Activity(), View.OnTouchListener {
         window.addFlags(1024)
         menuButton = findViewById(R.id.buttonMenu)
         menuButton.setOnTouchListener(this)
+        // v2.2.3 TalkBack fix: double-tap fires ACTION_CLICK -> performClick().
+        menuButton.setOnClickListener { showMenu(); playMenuSound() }
         title = "Learn game screen"
         menuButton.text = "Menu"
         bindCells()

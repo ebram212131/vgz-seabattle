@@ -49,6 +49,10 @@ class ActivityGameScreen : Activity(), View.OnTouchListener, SeaBattleEngine.Lis
         bindCells()
         menuButton = findViewById(R.id.buttonMenu)
         menuButton.setOnTouchListener(this)
+        // v2.2.3 TalkBack fix: the double-tap performs ACTION_CLICK ->
+        // performClick(); without an OnClickListener the game menu button was
+        // dead under TalkBack.
+        menuButton.setOnClickListener { openScreenMenu() }
 
         engine.newGame()
         handler = GameHandler()
@@ -123,6 +127,12 @@ class ActivityGameScreen : Activity(), View.OnTouchListener, SeaBattleEngine.Lis
             for (c in 0 until 10) {
                 cells[r][c] = findViewById(ids[r][c])
                 cells[r][c]?.setOnTouchListener(this)
+                // v2.2.3 TalkBack fix: without an OnClickListener a TalkBack
+                // double-tap (ACTION_CLICK) could neither explore a cell on the
+                // my-screen nor shoot on the opponent screen.
+                val row = r
+                val col = c
+                cells[r][c]?.setOnClickListener { activateCell(row, col) }
             }
         }
         val labels = engine.cellLabels()
@@ -413,36 +423,60 @@ class ActivityGameScreen : Activity(), View.OnTouchListener, SeaBattleEngine.Lis
 
     // ----------------------------------------------------------------- input
 
+    /** Original lock condition, shared by the touch and TalkBack click paths. */
+    private fun locked(): Boolean =
+        engine.shotLocked || engine.resultLocked || engine.switchLocked || engine.gameOver
+
+    /**
+     * v2.2.3 TalkBack fix: shared dispatcher for the menu button. Direct
+     * touches arrive here via onTouch(ACTION_DOWN); TalkBack double-taps
+     * arrive via OnClickListener -> performClick() (ACTION_CLICK never
+     * produces a MotionEvent, so the touch path alone was dead under TalkBack).
+     */
+    private fun openScreenMenu() {
+        if (locked()) return
+        playMenuSound()
+        if (engine.screen == SeaBattleEngine.SCREEN_MY) {
+            showMyMenu()
+        } else {
+            showOpponentMenu()
+        }
+    }
+
+    /** v2.2.3 TalkBack fix: shared dispatcher for one grid cell (explore/shoot). */
+    private fun activateCell(r: Int, c: Int) {
+        if (locked()) return
+        if (engine.screen == SeaBattleEngine.SCREEN_MY) {
+            engine.exploreMyCell(r, c)
+        } else {
+            engine.tapOpponentCell(r, c)
+        }
+    }
+
     override fun onTouch(view: View?, event: MotionEvent?): Boolean {
-        if (engine.shotLocked || engine.resultLocked || engine.switchLocked || engine.gameOver) {
-            return false
+        // Consume everything (return true): with an OnTouchListener returning
+        // false the View would additionally synthesize a click on ACTION_UP,
+        // which - now that the cells/menu button have an OnClickListener for
+        // TalkBack - would fire the action a second time on every real tap.
+        if (locked()) {
+            return true
         }
         if (view === menuButton) {
             if (event?.actionMasked == MotionEvent.ACTION_DOWN) {
-                playMenuSound()
-                if (engine.screen == SeaBattleEngine.SCREEN_MY) {
-                    showMyMenu()
-                } else {
-                    showOpponentMenu()
-                }
+                openScreenMenu()
             }
-            return false
+            return true
         }
-        event ?: return false
-        if (event.actionMasked != MotionEvent.ACTION_DOWN) return false
+        if (event?.actionMasked != MotionEvent.ACTION_DOWN) return true
         for (r in 0 until 10) {
             for (c in 0 until 10) {
                 if (view === cells[r][c]) {
-                    if (engine.screen == SeaBattleEngine.SCREEN_MY) {
-                        engine.exploreMyCell(r, c)
-                    } else {
-                        engine.tapOpponentCell(r, c)
-                    }
-                    return false
+                    activateCell(r, c)
+                    return true
                 }
             }
         }
-        return false
+        return true
     }
 
     override fun onDestroy() {

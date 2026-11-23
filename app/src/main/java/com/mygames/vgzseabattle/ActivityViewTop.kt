@@ -42,6 +42,17 @@ class ActivityViewTop : Activity(), View.OnTouchListener {
             lp?.height = rowHeight
             buttons[i]?.layoutParams = lp
             buttons[i]?.setOnTouchListener(this)
+            // v2.2.3 TalkBack fix: double-tap fires ACTION_CLICK -> performClick();
+            // an OnTouchListener alone never runs through that path, so under
+            // TalkBack the rank buttons and the return button did nothing.
+            val rank = i
+            buttons[i]?.setOnClickListener {
+                if (GlobalState.speaking) return@setOnClickListener
+                if (rank < 10) speakRank(rank) else {
+                    GlobalState.exitFlag = true
+                    finish()
+                }
+            }
         }
     }
 
@@ -59,8 +70,11 @@ class ActivityViewTop : Activity(), View.OnTouchListener {
     }
 
     override fun onTouch(view: View?, event: MotionEvent?): Boolean {
+        // Consume every event: returning false would let the Button synthesize a
+        // click on ACTION_UP and double-fire now that an OnClickListener handles
+        // the TalkBack double-tap path.
         if (GlobalState.speaking || event?.actionMasked != MotionEvent.ACTION_DOWN) {
-            return false
+            return true
         }
         for (rank in 0 until 10) {
             if (view === buttons[rank]) {
@@ -73,7 +87,7 @@ class ActivityViewTop : Activity(), View.OnTouchListener {
             finish()
             return true
         }
-        return false
+        return true
     }
 
     override fun onDestroy() {

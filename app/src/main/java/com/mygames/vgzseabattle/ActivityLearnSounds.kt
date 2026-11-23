@@ -59,8 +59,13 @@ class ActivityLearnSounds : Activity(), View.OnTouchListener {
         buttons[7] = findViewById(R.id.buttonLearnSoundEmptyCell)
         buttons[8] = findViewById(R.id.buttonLearnSoundTargetedCell)
         buttons[9] = findViewById(R.id.buttonLearnSoundReturn)
-        for (b in buttons) {
+        for ((index, b) in buttons.withIndex()) {
             b?.setOnTouchListener(this)
+            // v2.2.3 TalkBack fix: double-tap fires ACTION_CLICK -> performClick();
+            // an OnTouchListener alone never runs through that path.
+            b?.setOnClickListener {
+                if (index == 9) returnToMenu() else play(index)
+            }
             val lp = b?.layoutParams as? RelativeLayout.LayoutParams
             lp?.height = rowHeight
             b?.layoutParams = lp
@@ -101,7 +106,10 @@ class ActivityLearnSounds : Activity(), View.OnTouchListener {
     }
 
     override fun onTouch(view: View?, event: MotionEvent?): Boolean {
-        if (event?.actionMasked != MotionEvent.ACTION_DOWN) return false
+        // Consume every event: returning false would let the Button synthesize a
+        // click on ACTION_UP and double-fire now that an OnClickListener handles
+        // the TalkBack double-tap path.
+        if (event?.actionMasked != MotionEvent.ACTION_DOWN) return true
         val indexes = mapOf<View?, Int>(
             buttons[0] to 0, buttons[1] to 1, buttons[2] to 2, buttons[3] to 3,
             buttons[4] to 4, buttons[5] to 5, buttons[6] to 6, buttons[7] to 7,
@@ -116,6 +124,6 @@ class ActivityLearnSounds : Activity(), View.OnTouchListener {
             play(index)
             return true
         }
-        return false
+        return true
     }
 }
