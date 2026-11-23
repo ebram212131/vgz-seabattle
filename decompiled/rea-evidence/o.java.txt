@@ -1,0 +1,9 @@
+// ==== REA evidence: o.?  (overload 0, status=) ====
+// REA: body not available (native/abstract)
+
+// ==== REA evidence: o.onCompletion(android.media.MediaPlayer): void  (overload 0, status=complete) ====
+    @Override // android.media.MediaPlayer.OnCompletionListener
+    public void onCompletion(MediaPlayer mediaPlayer) {
+        this.a.a.release();
+        this.a.c();
+    }

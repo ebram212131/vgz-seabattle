@@ -1,0 +1,160 @@
+// ==== REA evidence: MainActivity.a(com.mygames.vgzseabattle.MainActivity): int  (overload 0, status=complete) ====
+// REA: body not available (native/abstract)
+
+// ==== REA evidence: MainActivity.a(): void  (overload 1, status=complete) ====
+    private void a() {
+        this.a = new r(this);
+    }
+
+// ==== REA evidence: MainActivity.a(com.mygames.vgzseabattle.MainActivity, int): void  (overload 2, status=complete) ====
+// REA: body not available (native/abstract)
+
+// ==== REA evidence: MainActivity.a(com.mygames.vgzseabattle.MainActivity, java.lang.String): void  (overload 3, status=complete) ====
+// REA: body not available (native/abstract)
+
+// ==== REA evidence: MainActivity.a(com.mygames.vgzseabattle.MainActivity, java.lang.String, java.lang.String): void  (overload 4, status=complete) ====
+// REA: body not available (native/abstract)
+
+// ==== REA evidence: MainActivity.a(com.mygames.vgzseabattle.MainActivity, boolean): void  (overload 5, status=complete) ====
+// REA: body not available (native/abstract)
+
+// ==== REA evidence: MainActivity.a(java.lang.String, java.lang.String): void  (overload 6, status=complete) ====
+    /* JADX INFO: Access modifiers changed from: private */
+    public void a(String str, String str2) {
+        String[] strArrSplit = str.split("\\*");
+        this.j = String.valueOf(this.q) + str2;
+        if (new aa().c(strArrSplit[0]).contentEquals(str2)) {
+            new Thread(new t(this)).start();
+        } else {
+            this.j = "";
+        }
+    }
+
+// ==== REA evidence: MainActivity.b(): void  (overload 0, status=complete) ====
+    private void b() {
+        new Thread(new s(this)).start();
+    }
+
+// ==== REA evidence: MainActivity.b(com.mygames.vgzseabattle.MainActivity, int): void  (overload 1, status=complete) ====
+// REA: body not available (native/abstract)
+
+// ==== REA evidence: MainActivity.b(com.mygames.vgzseabattle.MainActivity, boolean): void  (overload 2, status=complete) ====
+// REA: body not available (native/abstract)
+
+// ==== REA evidence: MainActivity.b(com.mygames.vgzseabattle.MainActivity): boolean  (overload 3, status=complete) ====
+// REA: body not available (native/abstract)
+
+// ==== REA evidence: MainActivity.c(com.mygames.vgzseabattle.MainActivity): android.media.SoundPool  (overload 0, status=complete) ====
+// REA: body not available (native/abstract)
+
+// ==== REA evidence: MainActivity.c(): java.lang.String  (overload 1, status=complete) ====
+    /* JADX INFO: Access modifiers changed from: private */
+    public String c() {
+        this.q = new x().a("data0.txt");
+        w wVar = new w();
+        String strA = wVar.a(this);
+        String strB = wVar.b(this);
+        String strA2 = wVar.a();
+        aa aaVar = new aa();
+        return String.valueOf(aaVar.b(aaVar.a(strA, this.q))) + aaVar.b(aaVar.a(strB, this.q)) + strA2;
+    }
+
+// ==== REA evidence: MainActivity.c(com.mygames.vgzseabattle.MainActivity, int): void  (overload 2, status=complete) ====
+// REA: body not available (native/abstract)
+
+// ==== REA evidence: MainActivity.?  (overload 0, status=) ====
+// REA: body not available (native/abstract)
+
+// ==== REA evidence: MainActivity.d(com.mygames.vgzseabattle.MainActivity): int  (overload 0, status=complete) ====
+// REA: body not available (native/abstract)
+
+// ==== REA evidence: MainActivity.d(): void  (overload 1, status=complete) ====
+    /* JADX INFO: Access modifiers changed from: private */
+    public void d() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Error Internet connection");
+        builder.setMessage("Please check your Internet connection and then try to run the game again.");
+        builder.setPositiveButton("Ok", new u(this));
+        builder.create().show();
+    }
+
+// ==== REA evidence: MainActivity.e(com.mygames.vgzseabattle.MainActivity): java.lang.String  (overload 0, status=complete) ====
+// REA: body not available (native/abstract)
+
+// ==== REA evidence: MainActivity.f(com.mygames.vgzseabattle.MainActivity): int  (overload 0, status=complete) ====
+// REA: body not available (native/abstract)
+
+// ==== REA evidence: MainActivity.g(com.mygames.vgzseabattle.MainActivity): int  (overload 0, status=complete) ====
+// REA: body not available (native/abstract)
+
+// ==== REA evidence: MainActivity.h(com.mygames.vgzseabattle.MainActivity): boolean  (overload 0, status=complete) ====
+// REA: body not available (native/abstract)
+
+// ==== REA evidence: MainActivity.i(com.mygames.vgzseabattle.MainActivity): int  (overload 0, status=complete) ====
+// REA: body not available (native/abstract)
+
+// ==== REA evidence: MainActivity.j(com.mygames.vgzseabattle.MainActivity): java.util.Timer  (overload 0, status=complete) ====
+// REA: body not available (native/abstract)
+
+// ==== REA evidence: MainActivity.k(com.mygames.vgzseabattle.MainActivity): int  (overload 0, status=complete) ====
+// REA: body not available (native/abstract)
+
+// ==== REA evidence: MainActivity.l(com.mygames.vgzseabattle.MainActivity): java.lang.String  (overload 0, status=complete) ====
+// REA: body not available (native/abstract)
+
+// ==== REA evidence: MainActivity.m(com.mygames.vgzseabattle.MainActivity): int  (overload 0, status=complete) ====
+// REA: body not available (native/abstract)
+
+// ==== REA evidence: MainActivity.n(com.mygames.vgzseabattle.MainActivity): void  (overload 0, status=complete) ====
+// REA: body not available (native/abstract)
+
+// ==== REA evidence: MainActivity.o(com.mygames.vgzseabattle.MainActivity): android.app.Activity  (overload 0, status=complete) ====
+// REA: body not available (native/abstract)
+
+// ==== REA evidence: MainActivity.onCreateOptionsMenu(android.view.Menu): boolean  (overload 0, status=complete) ====
+    @Override // android.app.Activity
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_main, menu);
+        return true;
+    }
+
+// ==== REA evidence: MainActivity.onCreate(android.os.Bundle): void  (overload 0, status=complete) ====
+    @Override // android.app.Activity
+    public void onCreate(Bundle bundle) {
+        super.onCreate(bundle);
+        setContentView(R.layout.activity_main);
+        a();
+        b();
+        try {
+            new v().a(this);
+        } catch (Exception e) {
+        }
+        getWindow().addFlags(1024);
+        p.a = 0;
+        this.l = (ImageView) findViewById(R.id.mainPictureView);
+        this.l.setOnTouchListener(this);
+        this.m = (RelativeLayout) findViewById(R.id.layout_main_activity);
+        this.m.setOnTouchListener(this);
+        this.h = new Timer();
+        this.h.schedule(new q(this), 1000L, 1000L);
+        setVolumeControlStream(3);
+        this.b = new SoundPool(2, 3, 0);
+        this.c = this.b.load(this, R.raw.sound_game_intro, 1);
+        this.e = this.b.load(this, R.raw.sound_start_internet_error, 2);
+    }
+
+// ==== REA evidence: MainActivity.onDestroy(): void  (overload 0, status=complete) ====
+    @Override // android.app.Activity
+    protected void onDestroy() {
+        super.onDestroy();
+        Process.killProcess(Process.myPid());
+    }
+
+// ==== REA evidence: MainActivity.onTouch(android.view.View, android.view.MotionEvent): boolean  (overload 0, status=complete) ====
+    @Override // android.view.View.OnTouchListener
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        return false;
+    }
+
+// ==== REA evidence: MainActivity.p(com.mygames.vgzseabattle.MainActivity): android.os.Handler  (overload 0, status=complete) ====
+// REA: body not available (native/abstract)

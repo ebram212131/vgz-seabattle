@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">VGZSeaBattle</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="sea_battle_menu">Sea Battle menu</string>
+    <string name="sea_battle_game_screen">Sea Battle game screen</string>
+    <string name="sea_battle_learn_sounds">Sea Battle learn sounds</string>
+    <string name="sea_battle_learn_game_screen">Sea Battle learn game screen</string>
+    <string name="start_game">Start game</string>
+    <string name="test_headsets">Test headsets</string>
+    <string name="learn_game_sounds">Learn game sounds</string>
+    <string name="learn_game_screen">Learn game screen</string>
+    <string name="final_score">Final score</string>
+    <string name="send_score_to_vipgameszone">Send score to vipgameszone</string>
+    <string name="your_top_10_score">Your top 10 score</string>
+    <string name="quit_game">Quit game</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="my_screen_menu">My screen menu</string>
+    <string name="my_ships_menu">My ships menu</string>
+    <string name="a1">a1</string>
+    <string name="vgz_sea_battle">VGZ Sea Battle</string>
+    <string name="position_1">Position 1</string>
+    <string name="position_2">Position 2</string>
+    <string name="position_3">Position 3</string>
+    <string name="position_4">Position 4</string>
+    <string name="position_5">Position 5</string>
+    <string name="position_6">Position 6</string>
+    <string name="position_7">Position 7</string>
+    <string name="position_8">Position 8</string>
+    <string name="position_9">Position 9</string>
+    <string name="position_10">Position 10</string>
+    <string name="return_to_main_menu">Return to main menu</string>
+    <string name="gun">Gun</string>
+    <string name="target_hit">Target hit</string>
+    <string name="you_missed">You missed</string>
+    <string name="opponent_missed">Opponent missed</string>
+    <string name="ship_descroyed">Ship Descroyed</string>
+    <string name="menu_open_and_close">Menu open and close</string>
+    <string name="your_ship">Your ship</string>
+    <string name="empty_cell">Empty cell</string>
+    <string name="targeted_cell">Targeted cell</string>
+    <string name="ship_destroyed">Ship destroyed</string>
+</resources>

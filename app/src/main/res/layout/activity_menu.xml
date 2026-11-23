@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@id/layout_main_menu"
+    android:background="@drawable/mainBgrn"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <Button android:id="@id/buttonStartGame" android:layout_width="match_parent" android:layout_height="40.0dip" android:text="@string/start_game" android:layout_alignParentTop="true" android:layout_centerHorizontal="true" android:contentDescription="@string/start_game" />
+    <Button android:id="@id/buttonTestHeadSets" android:layout_width="match_parent" android:layout_height="40.0dip" android:text="@string/test_headsets" android:layout_below="@id/buttonStartGame" android:layout_centerHorizontal="true" android:contentDescription="@string/test_headsets" />
+    <Button android:id="@id/buttonLearnGameSounds" android:layout_width="match_parent" android:layout_height="40.0dip" android:text="@string/learn_game_sounds" android:layout_below="@id/buttonTestHeadSets" android:layout_centerHorizontal="true" android:contentDescription="@string/learn_game_sounds" />
+    <Button android:id="@id/buttonLearnGameScreen" android:layout_width="match_parent" android:layout_height="40.0dip" android:text="@string/learn_game_screen" android:layout_below="@id/buttonLearnGameSounds" android:layout_centerHorizontal="true" android:contentDescription="@string/learn_game_screen" />
+    <Button android:id="@id/buttonFinalScore" android:layout_width="match_parent" android:layout_height="40.0dip" android:text="@string/final_score" android:layout_below="@id/buttonLearnGameScreen" android:layout_centerHorizontal="true" android:contentDescription="@string/final_score" />
+    <Button android:id="@id/buttonSendScore" android:layout_width="match_parent" android:layout_height="40.0dip" android:text="@string/send_score_to_vipgameszone" android:layout_below="@id/buttonFinalScore" android:layout_centerHorizontal="true" android:contentDescription="@string/send_score_to_vipgameszone" />
+    <Button android:id="@id/buttonTop10Score" android:layout_width="match_parent" android:layout_height="40.0dip" android:text="@string/your_top_10_score" android:layout_below="@id/buttonSendScore" android:layout_centerHorizontal="true" android:contentDescription="@string/your_top_10_score" />
+    <Button android:id="@id/buttonRegisterAccount" android:layout_width="match_parent" android:layout_height="40.0dip" android:text="@string/register" android:layout_below="@id/buttonTop10Score" android:layout_centerHorizontal="true" android:contentDescription="@string/register" />
+    <Button android:id="@id/buttonSettings" android:layout_width="match_parent" android:layout_height="40.0dip" android:text="@string/menu_settings" android:layout_below="@id/buttonRegisterAccount" android:layout_centerHorizontal="true" android:contentDescription="@string/menu_settings" />
+    <Button android:id="@id/buttonQuitGame" android:layout_width="match_parent" android:layout_height="40.0dip" android:text="@string/quit_game" android:layout_below="@id/buttonSettings" android:layout_centerHorizontal="true" android:contentDescription="@string/quit_game" />
+</RelativeLayout>

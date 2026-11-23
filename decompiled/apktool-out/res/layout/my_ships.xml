@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout android:id="@id/table_my_ships" android:background="@drawable/mainBgrn" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TableRow android:layout_weight="1.0">
+        <Button android:id="@id/buttonMenu" android:layout_width="fill_parent" android:layout_height="100.0dip" android:text="@string/my_ships_menu" android:layout_weight="1.0" android:contentDescription="@string/my_ships_menu" />
+    </TableRow>
+    <TableRow android:layout_weight="1.0">
+        <Button android:id="@id/msba1" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msba2" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msba3" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msba4" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msba5" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msba6" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msba7" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msba8" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msba9" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msba10" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+    </TableRow>
+    <TableRow android:layout_weight="1.0">
+        <Button android:id="@id/msbb1" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbb2" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbb3" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbb4" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbb5" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbb6" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbb7" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbb8" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbb9" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbb10" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+    </TableRow>
+    <TableRow android:layout_weight="1.0">
+        <Button android:id="@id/msbc1" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbc2" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbc3" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbc4" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbc5" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbc6" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbc7" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbc8" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbc9" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbc10" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+    </TableRow>
+    <TableRow android:layout_weight="1.0">
+        <Button android:id="@id/msbd1" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbd2" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbd3" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbd4" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbd5" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbd6" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbd7" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbd8" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbd9" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbd10" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+    </TableRow>
+    <TableRow android:layout_weight="1.0">
+        <Button android:id="@id/msbe1" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbe2" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbe3" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbe4" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbe5" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbe6" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbe7" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbe8" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbe9" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbe10" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+    </TableRow>
+    <TableRow android:layout_weight="1.0">
+        <Button android:id="@id/msbf1" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbf2" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbf3" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbf4" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbf5" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbf6" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbf7" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbf8" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbf9" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbf10" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+    </TableRow>
+    <TableRow android:layout_weight="1.0">
+        <Button android:id="@id/msbg1" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbg2" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbg3" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbg4" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbg5" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbg6" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbg7" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbg8" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbg9" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbg10" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+    </TableRow>
+    <TableRow android:layout_weight="1.0">
+        <Button android:id="@id/msbh1" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbh2" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbh3" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbh4" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbh5" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbh6" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbh7" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbh8" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbh9" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbh10" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+    </TableRow>
+    <TableRow android:layout_weight="1.0">
+        <Button android:id="@id/msbi1" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbi2" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbi3" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbi4" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbi5" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbi6" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbi7" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbi8" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbi9" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbi10" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+    </TableRow>
+    <TableRow android:layout_weight="1.0">
+        <Button android:id="@id/msbj1" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbj2" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbj3" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbj4" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbj5" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbj6" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbj7" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbj8" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbj9" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+        <Button android:id="@id/msbj10" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="" android:layout_weight="1.0" android:contentDescription="" />
+    </TableRow>
+</TableLayout>

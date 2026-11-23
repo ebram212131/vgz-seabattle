@@ -1,0 +1,6 @@
+# VGZ Sea Battle server - block database and log files from the web.
+Options -Indexes
+
+<FilesMatch "\.(sqlite3|sqlite3-wal|sqlite3-shm|log)$">
+  Require all denied
+</FilesMatch>

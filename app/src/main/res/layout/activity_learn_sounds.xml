@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@id/layout_learn_sounds"
+    android:background="@drawable/mainBgrn"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <Button android:id="@id/buttonLearnSoundGun" android:padding="10.0dip" android:layout_width="match_parent" android:layout_height="0.0dip" android:text="@string/gun" android:layout_alignParentTop="true" android:contentDescription="@string/gun" />
+    <Button android:id="@id/buttonLearnSoundTargetHit" android:padding="10.0dip" android:layout_width="match_parent" android:layout_height="0.0dip" android:text="@string/target_hit" android:layout_below="@id/buttonLearnSoundGun" android:contentDescription="@string/target_hit" />
+    <Button android:id="@id/buttonLearnSoundYouMissed" android:padding="10.0dip" android:layout_width="match_parent" android:layout_height="0.0dip" android:text="@string/you_missed" android:layout_below="@id/buttonLearnSoundTargetHit" android:contentDescription="@string/you_missed" />
+    <Button android:id="@id/buttonLearnSoundOpponentMissed" android:padding="10.0dip" android:layout_width="match_parent" android:layout_height="0.0dip" android:text="@string/opponent_missed" android:layout_below="@id/buttonLearnSoundYouMissed" android:contentDescription="@string/opponent_missed" />
+    <Button android:id="@id/buttonLearnSoundShipDestroyed" android:padding="10.0dip" android:layout_width="match_parent" android:layout_height="0.0dip" android:text="@string/ship_destroyed" android:layout_below="@id/buttonLearnSoundOpponentMissed" android:contentDescription="@string/ship_destroyed" />
+    <Button android:id="@id/buttonLearnSoundMenuOpenClose" android:padding="10.0dip" android:layout_width="match_parent" android:layout_height="0.0dip" android:text="@string/menu_open_and_close" android:layout_below="@id/buttonLearnSoundShipDestroyed" android:contentDescription="@string/menu_open_and_close" />
+    <Button android:id="@id/buttonLearnSoundYourShip" android:padding="10.0dip" android:layout_width="match_parent" android:layout_height="0.0dip" android:text="@string/your_ship" android:layout_below="@id/buttonLearnSoundMenuOpenClose" android:contentDescription="@string/your_ship" />
+    <Button android:id="@id/buttonLearnSoundEmptyCell" android:padding="10.0dip" android:layout_width="match_parent" android:layout_height="0.0dip" android:text="@string/empty_cell" android:layout_below="@id/buttonLearnSoundYourShip" android:contentDescription="@string/empty_cell" />
+    <Button android:id="@id/buttonLearnSoundTargetedCell" android:padding="10.0dip" android:layout_width="match_parent" android:layout_height="0.0dip" android:text="@string/targeted_cell" android:layout_below="@id/buttonLearnSoundEmptyCell" android:contentDescription="@string/targeted_cell" />
+    <Button android:id="@id/buttonLearnSoundReturn" android:padding="10.0dip" android:layout_width="match_parent" android:layout_height="0.0dip" android:text="@string/return_to_main_menu" android:layout_below="@id/buttonLearnSoundTargetedCell" android:contentDescription="@string/return_to_main_menu" />
+</RelativeLayout>

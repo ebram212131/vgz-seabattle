@@ -1,0 +1,25 @@
+// ==== REA evidence: g.?  (overload 0, status=) ====
+// REA: body not available (native/abstract)
+
+// ==== REA evidence: g.onClick(android.content.DialogInterface, int): void  (overload 0, status=complete) ====
+    @Override // android.content.DialogInterface.OnClickListener
+    public void onClick(DialogInterface dialogInterface, int i) {
+        switch (i) {
+            case 0:
+                this.a.a("Tap Close menu item to continue the game with current settings.");
+                this.a.c();
+                break;
+            case 1:
+                this.a.a("Tap Show opponent screen item to shoot the opponent ships.");
+                this.a.c();
+                break;
+            case 2:
+                this.a.a("Tap this item to get the game help.");
+                this.a.c();
+                break;
+            case 3:
+                p.d = true;
+                this.a.finish();
+                break;
+        }
+    }

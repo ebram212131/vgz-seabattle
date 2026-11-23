@@ -1,0 +1,193 @@
+// ==== REA evidence: RegisterApp.a(com.mygames.vgzseabattle.RegisterApp): int  (overload 0, status=complete) ====
+// REA: body not available (native/abstract)
+
+// ==== REA evidence: RegisterApp.a(): void  (overload 1, status=complete) ====
+    private void a() {
+        this.a = new ab(this);
+    }
+
+// ==== REA evidence: RegisterApp.a(com.mygames.vgzseabattle.RegisterApp, java.lang.String): void  (overload 2, status=complete) ====
+// REA: body not available (native/abstract)
+
+// ==== REA evidence: RegisterApp.a(com.mygames.vgzseabattle.RegisterApp, boolean): void  (overload 3, status=complete) ====
+// REA: body not available (native/abstract)
+
+// ==== REA evidence: RegisterApp.a(java.lang.String, java.lang.String): void  (overload 4, status=complete) ====
+    private void a(String str, String str2) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(str);
+        builder.setMessage(str2);
+        builder.setPositiveButton("Ok", new ad(this));
+        builder.create().show();
+    }
+
+// ==== REA evidence: RegisterApp.a(java.lang.String): boolean  (overload 5, status=complete) ====
+    private boolean a(String str) {
+        if (str.length() == 0) {
+            a("Login error!", "Please fill in Login text field");
+            return false;
+        }
+        if (str.length() > 10) {
+            a("Wrong Login length!", "Your Login must have at least 10 characters");
+            return false;
+        }
+        for (int i = 0; i < str.length(); i++) {
+            char cCharAt = str.charAt(i);
+            if ((cCharAt < '0' || cCharAt > '9') && ((cCharAt < 'A' || cCharAt > 'Z') && (cCharAt < 'a' || cCharAt > 'z'))) {
+                a("Wrong character!", "Your Login must have at least 10 characters and limited to A - Z, 0 - 9");
+                return false;
+            }
+        }
+        return true;
+    }
+
+// ==== REA evidence: RegisterApp.b(): void  (overload 0, status=complete) ====
+    private void b() {
+        String string = this.b.getText().toString();
+        if (a(string)) {
+            this.f = string;
+            this.d = new v().a();
+            w wVar = new w();
+            String strA = wVar.a(this);
+            String strB = wVar.b(this);
+            String strA2 = wVar.a();
+            aa aaVar = new aa();
+            this.d = aaVar.a(this.d);
+            this.d = this.d.substring(0, 10);
+            new x().a("data0.txt", this.d);
+            this.g = String.valueOf(this.d) + aaVar.b(aaVar.a(strA, this.d)) + aaVar.b(aaVar.a(strB, this.d)) + strA2;
+            new Thread(new ac(this)).start();
+        }
+    }
+
+// ==== REA evidence: RegisterApp.b(com.mygames.vgzseabattle.RegisterApp): void  (overload 1, status=complete) ====
+// REA: body not available (native/abstract)
+
+// ==== REA evidence: RegisterApp.b(java.lang.String): void  (overload 2, status=complete) ====
+    private void b(String str) {
+        String[] strArrSplit = str.split("\\*");
+        strArrSplit[1] = new aa().a(0, strArrSplit[0], strArrSplit[1]);
+        p.g = 0;
+        startActivity(new Intent(strArrSplit[1]));
+    }
+
+// ==== REA evidence: RegisterApp.c(com.mygames.vgzseabattle.RegisterApp): int  (overload 0, status=complete) ====
+// REA: body not available (native/abstract)
+
+// ==== REA evidence: RegisterApp.c(): void  (overload 1, status=complete) ====
+    private void c() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Register help");
+        builder.setMessage("There is 1 text field and 1 button on the register screen. Please type in the text field your login or nickname and click the Register button.\nPut your finger on the screen and move it either up and down to know where text field and button are placed.\nTap twice the text field to open a virtual keyboard, if it wasn't opened automatically.\nWhen you have successfully completed the registration process you will be moved to a game menu.");
+        builder.setPositiveButton("Ok", new ae(this));
+        builder.create().show();
+    }
+
+// ==== REA evidence: RegisterApp.?  (overload 0, status=) ====
+// REA: body not available (native/abstract)
+
+// ==== REA evidence: RegisterApp.d(): void  (overload 0, status=complete) ====
+    /* JADX INFO: Access modifiers changed from: private */
+    public void d() {
+        String[] strArrSplit = this.j.split("\\*");
+        if (strArrSplit[0].compareTo("1") == 0) {
+            a("Registration error!", "Login expected");
+            return;
+        }
+        if (strArrSplit[0].compareTo("2") == 0) {
+            a("Registration error!", "User ID expected");
+            return;
+        }
+        if (strArrSplit[0].compareTo("3") == 0) {
+            a("Registration error!", "This login is already taken");
+        } else {
+            if (strArrSplit[0].compareTo("1000") != 0) {
+                a("Registration error!", "Unknown exception. Please try again");
+                return;
+            }
+            this.j = this.j.replace("1000*", "");
+            new x().a("data1.txt", this.j);
+            e();
+        }
+    }
+
+// ==== REA evidence: RegisterApp.d(com.mygames.vgzseabattle.RegisterApp): void  (overload 1, status=complete) ====
+// REA: body not available (native/abstract)
+
+// ==== REA evidence: RegisterApp.e(com.mygames.vgzseabattle.RegisterApp): java.lang.String  (overload 0, status=complete) ====
+// REA: body not available (native/abstract)
+
+// ==== REA evidence: RegisterApp.e(): void  (overload 1, status=complete) ====
+    private void e() {
+        new Thread(new af(this)).start();
+    }
+
+// ==== REA evidence: RegisterApp.f(com.mygames.vgzseabattle.RegisterApp): java.lang.String  (overload 0, status=complete) ====
+// REA: body not available (native/abstract)
+
+// ==== REA evidence: RegisterApp.f(): void  (overload 1, status=complete) ====
+    /* JADX INFO: Access modifiers changed from: private */
+    public void f() {
+        String[] strArrSplit = this.j.split("\\*");
+        if (strArrSplit[0].compareTo("1") == 0) {
+            a("Registration error!", "Wrong User ID");
+        } else if (strArrSplit[0].compareTo("1000") != 0) {
+            a("Registration error!", "Unknown exception. Please try again");
+        } else {
+            this.j = this.j.replace("1000*", "");
+            b(this.j);
+        }
+    }
+
+// ==== REA evidence: RegisterApp.g(com.mygames.vgzseabattle.RegisterApp): android.os.Handler  (overload 0, status=complete) ====
+// REA: body not available (native/abstract)
+
+// ==== REA evidence: RegisterApp.onCreate(android.os.Bundle): void  (overload 0, status=complete) ====
+    @Override // android.app.Activity
+    public void onCreate(Bundle bundle) {
+        super.onCreate(bundle);
+        setContentView(R.layout.register_app);
+        a();
+        getWindow().addFlags(1024);
+        this.b = (EditText) findViewById(R.id.editTextLogin);
+        this.c = (Button) findViewById(R.id.buttonRegister);
+        this.c.setOnTouchListener(this);
+        this.e = false;
+        c();
+    }
+
+// ==== REA evidence: RegisterApp.onStart(): void  (overload 0, status=complete) ====
+    @Override // android.app.Activity
+    public void onStart() {
+        super.onStart();
+        if (p.a == 1) {
+            finish();
+        } else if (p.g == 0 || p.g == 100) {
+            p.g = 100;
+        } else {
+            p.a = 1;
+            finish();
+        }
+    }
+
+// ==== REA evidence: RegisterApp.onStop(): void  (overload 0, status=complete) ====
+    @Override // android.app.Activity
+    public void onStop() {
+        if (p.a == 1 || p.g == 100) {
+            p.a = 1;
+            finish();
+        }
+        super.onStop();
+    }
+
+// ==== REA evidence: RegisterApp.onTouch(android.view.View, android.view.MotionEvent): boolean  (overload 0, status=complete) ====
+    @Override // android.view.View.OnTouchListener
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        if (view == this.c && motionEvent.getAction() == 0) {
+            if (this.e) {
+                return true;
+            }
+            b();
+        }
+        return false;
+    }

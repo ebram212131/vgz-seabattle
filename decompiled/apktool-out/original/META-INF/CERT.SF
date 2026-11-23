@@ -1,0 +1,226 @@
+Signature-Version: 1.0
+Created-By: 1.0 (Android)
+SHA1-Digest-Manifest: NJW9OJktt5YRNua0lNiNYuBy+3c=
+
+Name: res/drawable-xhdpi/ic_launcher.png
+SHA1-Digest: V0eY5QQfY8fLd2zHQq75hhf3XoY=
+
+Name: res/drawable-mdpi/ic_action_search.png
+SHA1-Digest: jAGFiT7RUDOYcmBQqk2FP01Xtb0=
+
+Name: res/raw/sound_score_40.wav
+SHA1-Digest: 7XEA34BiTczXhcLH3VUhQaow4zE=
+
+Name: res/layout/activity_learn_sounds.xml
+SHA1-Digest: G/AhaRJVw+gvcjD0RxVvVhKKoWI=
+
+Name: res/raw/sound_score_50.wav
+SHA1-Digest: 7mwzpDdE+gApaP87VkHShDo2jRw=
+
+Name: res/raw/sound_score_2.wav
+SHA1-Digest: jtg/YyLm1t9nLbPrp5JlwscST0U=
+
+Name: res/raw/sound_score_6.wav
+SHA1-Digest: z+xigNDIP6pYhSPrsDhHyTldAmA=
+
+Name: res/raw/sound_score_16.wav
+SHA1-Digest: AfDLyr5PzvjReXC6Rb2wjkPMnHA=
+
+Name: res/raw/sound_score_1.wav
+SHA1-Digest: dmHgeuMNFfoR5vbnIMuaXBjKVCE=
+
+Name: res/raw/sound_test_left.wav
+SHA1-Digest: Qa8Aeg95O5UKk5e9Bh0cjP/LaZ8=
+
+Name: res/raw/sound_start_internet_error.wav
+SHA1-Digest: QG29znxLG6xrD3LwofOQ1CroKZg=
+
+Name: res/raw/sound_game_gun.WAV
+SHA1-Digest: MAvulb9tKR8qjWZlfhw9h/Ws6xI=
+
+Name: res/raw/sound_score_100.wav
+SHA1-Digest: Y0FMGB9uHU+Xzy/EJ238jltwb5I=
+
+Name: res/layout/activity_menu.xml
+SHA1-Digest: GQjVRM/zre3QFra7unZAFaEqS3U=
+
+Name: res/raw/sound_score_17.wav
+SHA1-Digest: ygjv5wNdv8ZOfq1w69X98VtLKLg=
+
+Name: res/raw/sound_game_score_sent1.wav
+SHA1-Digest: BzRKs0LOIAwISDOoB7NcTbetoiY=
+
+Name: res/raw/sound_score_60.wav
+SHA1-Digest: jTY/PzKfECGKJYMJGLpuAgdfueQ=
+
+Name: res/raw/sound_score_12.wav
+SHA1-Digest: ag3KXqnZpPmvz1c5Dn0GOc/ejkw=
+
+Name: res/raw/sound_game_bgrn.wav
+SHA1-Digest: JBkx3a6mDY7PVu7/HRVDXgt4+GE=
+
+Name: res/raw/sound_score_19.wav
+SHA1-Digest: DG/p6RABrKhmmUDI2uuNw9iW45s=
+
+Name: res/raw/sound_game_score_sent2.wav
+SHA1-Digest: gFyYvw18wHoEN+qvn2Gesm+cVAg=
+
+Name: res/raw/sound_game_opponent_shoots.wav
+SHA1-Digest: rR9lRW5YqU5BEcN4DVGmHBgqcq4=
+
+Name: res/raw/sound_test_right.wav
+SHA1-Digest: 6/N1P3Ez5aybTayhg57t2vCosao=
+
+Name: res/raw/sound_score_8.wav
+SHA1-Digest: 2Qo4DpZsuHpM2xPC6YqhZ2zKd8U=
+
+Name: res/raw/sound_game_success.wav
+SHA1-Digest: uNLIu3iLVZWCp5dkL8PmDSfVyl8=
+
+Name: res/raw/sound_game_destroy.wav
+SHA1-Digest: 83xnjVFq7OYqmM/BWGcIGt03uv8=
+
+Name: res/raw/sound_game_empty.wav
+SHA1-Digest: qSdJ9LpMsvMKTJqo/QzI9hvea0w=
+
+Name: res/drawable-hdpi/ic_action_search.png
+SHA1-Digest: WvsoZfcfGbz7vtTCwzXLh3VcxFw=
+
+Name: res/drawable-xhdpi/ic_action_search.png
+SHA1-Digest: 772ITFXOlprwo44bOLvLMa3Vdeg=
+
+Name: res/raw/sound_score_9.wav
+SHA1-Digest: GSuMC0bvSVxVvml7wSExFd14AJM=
+
+Name: res/raw/sound_menu_press_button.wav
+SHA1-Digest: AnR1P9Cf0GriyobQuBhsghR0jtE=
+
+Name: res/menu/activity_main.xml
+SHA1-Digest: +TxlwFse5S1W3JeDDbhhsmw838M=
+
+Name: res/drawable-hdpi/ic_launcher.png
+SHA1-Digest: FONSxTiTfpfwwsg0ZqDigsDCKMQ=
+
+Name: res/raw/sound_score_80.wav
+SHA1-Digest: U62BT+PNNBOpnmjanswTXlB8Ul4=
+
+Name: res/raw/sound_score_4.wav
+SHA1-Digest: hSoDv74Gsgkn2zemN0bUaXUEjj8=
+
+Name: resources.arsc
+SHA1-Digest: oULSn6Oia+vl8r7lgNNa5fyY1Ek=
+
+Name: res/layout/activity_view_top.xml
+SHA1-Digest: mbcE/W/iVoIYDxj4kzWqwx1QRTw=
+
+Name: res/raw/sound_score_11.wav
+SHA1-Digest: vth+cU+T7XnfOmjbPPv65dGFe5Q=
+
+Name: res/raw/sound_say_final_score.wav
+SHA1-Digest: bKbkBGxHQxRUV1LL47gEPtL0ngo=
+
+Name: res/raw/sound_game_menu.wav
+SHA1-Digest: 3iZJkbgiDcuQmUQKEV/9z3tLblY=
+
+Name: res/raw/sound_score_10.wav
+SHA1-Digest: 4JTmZ2MAIxo4nKHkHJBP8FkpmdU=
+
+Name: res/raw/sound_score_14.wav
+SHA1-Digest: o/9+/X79PP+gtGU9SPbzPtFXbzg=
+
+Name: res/drawable-ldpi/ic_launcher.png
+SHA1-Digest: Omr37qysBNsonIsX1rcEF89s/EY=
+
+Name: res/raw/sound_game_send_score_error.wav
+SHA1-Digest: 5GwL/PBAzIVxoUb/oTjOnM2F+Zs=
+
+Name: AndroidManifest.xml
+SHA1-Digest: DGAHaCikvS+qmULMIFhsVsfvdSE=
+
+Name: res/layout/my_ships.xml
+SHA1-Digest: AUGojlVKOCaMrOchhlIl6O8fXv8=
+
+Name: res/raw/sound_game_killed.wav
+SHA1-Digest: /adq/PuC41+APnaY+NfA/itUoBw=
+
+Name: res/raw/sound_score_13.wav
+SHA1-Digest: pASlm4bvzdhiD/UkhcIRCqaHgG0=
+
+Name: res/raw/sound_game_lose1.wav
+SHA1-Digest: R3L/CTKsf+ksAHuq6vnZ+sM4BkI=
+
+Name: res/layout/register_app.xml
+SHA1-Digest: YXenz2hRLouLrpDhHV7OtW5MIEg=
+
+Name: res/raw/sound_score_5.wav
+SHA1-Digest: pAsz3klP/DSyHV9Nf66TlILChjI=
+
+Name: res/raw/sound_score_30.wav
+SHA1-Digest: qR/E1+Igf9IHY1k2Es1MDXz4hFg=
+
+Name: res/raw/sound_game_ship.wav
+SHA1-Digest: Qkfkba8yuwrBW2nHn3gtne5lTDQ=
+
+Name: res/raw/sound_menu_aut_zone.wav
+SHA1-Digest: PuylNO4fIYRtbwsTj5XBFPCVtnM=
+
+Name: res/raw/sound_score_90.wav
+SHA1-Digest: 4KzNTJCRlSSPAsXRt/8GZsU+VEE=
+
+Name: res/raw/sound_score_1000000.wav
+SHA1-Digest: mKdou7tfucq5isPG9VpkTcp4/ro=
+
+Name: res/raw/sound_say_points.wav
+SHA1-Digest: c9/SA7FMpXW7Nx9wf6qKiF+o7sY=
+
+Name: res/raw/sound_score_70.wav
+SHA1-Digest: pDRejlclO5QciTSiZk3Ln8XPIEI=
+
+Name: res/raw/sound_score_20.wav
+SHA1-Digest: Xh0YQtiYb6wABuKgGBaY5lzOI6U=
+
+Name: res/raw/sound_game_you_shoot.wav
+SHA1-Digest: Nq0THo58vkJbE1oRwgndbXkUQ2s=
+
+Name: res/raw/sound_score_7.wav
+SHA1-Digest: AnEtd5Ija6NvWxgJFgkJFe7oMBU=
+
+Name: res/raw/sound_game_lose2.wav
+SHA1-Digest: rfovjp3AJ251xPaiflTEAhrpJUM=
+
+Name: res/raw/sound_score_1000.wav
+SHA1-Digest: LAUsEvg/Sj4/KEBYkEQ2ua1fNBA=
+
+Name: res/raw/sound_game_sending_score.wav
+SHA1-Digest: I3EmC5Y22B1jGjCzoRt2jnusuDI=
+
+Name: classes.dex
+SHA1-Digest: MJv0fnTRO6lJfO4dNRi9ly4i8h4=
+
+Name: res/raw/sound_score_18.wav
+SHA1-Digest: iqwm636WGVbBj5kvAAFj2Ghr7W0=
+
+Name: res/raw/sound_score_15.wav
+SHA1-Digest: 1zg5V5/g5k93Wlitu1Mez7pdkIg=
+
+Name: res/drawable-mdpi/ic_launcher.png
+SHA1-Digest: fr9GwtJ958RPAI5C05IYyJVk4eg=
+
+Name: res/raw/sound_menu_bgrn.wav
+SHA1-Digest: Qvsj9p4SZJj4QD+cTbIMjSCuNqk=
+
+Name: res/raw/sound_game_intro.wav
+SHA1-Digest: g+Ta5TLy6iduYwpbINxsmDuD040=
+
+Name: res/raw/sound_score_0.wav
+SHA1-Digest: aIB3w7fCQ1iciBAHLXLpB+02yIs=
+
+Name: res/layout/activity_main.xml
+SHA1-Digest: haHMqw3OndwtTgEfIm109NapPmg=
+
+Name: res/drawable-mdpi/picture_main.jpg
+SHA1-Digest: /iTFySg8d4RBdnqsPhws3Nh+3Xg=
+
+Name: res/raw/sound_score_3.wav
+SHA1-Digest: RhKlCmcf7KoJNhIdMqDpj+CnwZI=
+

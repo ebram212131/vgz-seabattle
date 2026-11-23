@@ -1,0 +1,18 @@
+# Android / Gradle
+.gradle/
+build/
+app/build/
+local.properties
+*.iml
+.idea/
+
+# Signing material is NOT public
+keystore/
+*.jks
+*.keystore
+
+# Server runtime data
+server/data/
+
+# OS junk
+.DS_Store

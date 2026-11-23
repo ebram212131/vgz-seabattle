@@ -1,0 +1,24 @@
+// ==== REA evidence: j.?  (overload 0, status=) ====
+// REA: body not available (native/abstract)
+
+// ==== REA evidence: j.run(): void  (overload 0, status=complete) ====
+    @Override // java.lang.Runnable
+    public void run() {
+        String str = new x().a("data1.txt").split("\\*")[0];
+        this.a.a(5);
+        this.a.t = true;
+        this.a.u = 0;
+        String strA = new y().a(str, new StringBuilder().append(p.b).toString());
+        if (strA.length() == 0) {
+            this.a.a(8);
+            return;
+        }
+        int iIntValue = Integer.valueOf(strA).intValue();
+        if (iIntValue < 1) {
+            this.a.a(8);
+        } else if (iIntValue <= 0 || iIntValue >= 11) {
+            this.a.a(7);
+        } else {
+            this.a.a(6);
+        }
+    }

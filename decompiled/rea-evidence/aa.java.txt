@@ -1,0 +1,88 @@
+// ==== REA evidence: aa.a(int, java.lang.String): int  (overload 0, status=complete) ====
+/* JADX INFO: loaded from: classes.dex */
+public class aa {
+    private int a(int i, String str) {
+        return str.charAt(i) - '0';
+    }
+
+// ==== REA evidence: aa.a(int, java.lang.String, java.lang.String): java.lang.String  (overload 1, status=complete) ====
+    public String a(int i, String str, String str2) {
+        String str3 = "";
+        int iB = b(a(i, str) + 10, str);
+        for (int i2 = 0; i2 < str2.length(); i2++) {
+            int iCharAt = str2.charAt(i2);
+            if (iCharAt > 96 && (iCharAt = iCharAt - iB) < 97) {
+                iCharAt += 26;
+            }
+            str3 = String.valueOf(str3) + ((char) iCharAt);
+        }
+        return str3;
+    }
+
+// ==== REA evidence: aa.a(java.lang.String): java.lang.String  (overload 2, status=complete) ====
+    public String a(String str) {
+        int length;
+        if (str.length() < 2 || (length = str.length() - 1) < 1) {
+            return str;
+        }
+        String str2 = "";
+        for (length = str.length() - 1; length > -1; length--) {
+            str2 = String.valueOf(str2) + str.charAt(length);
+        }
+        return str2;
+    }
+
+// ==== REA evidence: aa.a(java.lang.String, java.lang.String): java.lang.String  (overload 3, status=complete) ====
+    public String a(String str, String str2) {
+        String str3 = "";
+        int i = 0;
+        for (int i2 = 0; i2 < str.length(); i2++) {
+            if (str.charAt(i2) == '0') {
+                str3 = String.valueOf(str3) + str2.charAt(i);
+                i++;
+                if (i >= str2.length()) {
+                    i = 0;
+                }
+            } else {
+                str3 = String.valueOf(str3) + str.charAt(i2);
+            }
+        }
+        return str3;
+    }
+
+// ==== REA evidence: aa.b(int, java.lang.String): int  (overload 0, status=complete) ====
+    private int b(int i, String str) {
+        return (str.charAt(i) % '\t') + 1;
+    }
+
+// ==== REA evidence: aa.b(java.lang.String): java.lang.String  (overload 1, status=complete) ====
+    public String b(String str) {
+        String str2 = "";
+        for (int i = 0; i < str.length(); i++) {
+            str2 = (str.charAt(i) < '0' || str.charAt(i) > '9') ? String.valueOf(str2) + ((int) str.charAt(i)) : String.valueOf(str2) + str.charAt(i);
+        }
+        return str2;
+    }
+
+// ==== REA evidence: aa.c(java.lang.String): java.lang.String  (overload 0, status=complete) ====
+    public String c(String str) {
+        String strSubstring = str.substring(0, 10);
+        String strSubstring2 = str.substring(10);
+        String str2 = "";
+        int i = 0;
+        for (int i2 = 0; i2 < strSubstring2.length(); i2++) {
+            int iCharAt = (strSubstring.charAt(i) - '0') + (strSubstring2.charAt(i2) - '0');
+            if (iCharAt > 9) {
+                iCharAt -= 10;
+            }
+            str2 = String.valueOf(str2) + iCharAt;
+            i++;
+            if (i > 9) {
+                i = 0;
+            }
+        }
+        return str2;
+    }
+
+// ==== REA evidence: aa.?  (overload 0, status=) ====
+// REA: body not available (native/abstract)

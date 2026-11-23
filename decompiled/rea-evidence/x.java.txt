@@ -1,0 +1,176 @@
+// ==== REA evidence: x.a(java.lang.String): java.lang.String  (overload 0, status=complete) ====
+    public String a(String str) {
+        String str2 = "";
+        if (!d() || !b()) {
+            return "";
+        }
+        try {
+            FileInputStream fileInputStream = new FileInputStream(new File(String.valueOf(p.f) + "/" + str));
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream));
+            while (true) {
+                String line = bufferedReader.readLine();
+                if (line == null) {
+                    bufferedReader.close();
+                    fileInputStream.close();
+                    return str2;
+                }
+                str2 = String.valueOf(str2) + line;
+            }
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+// ==== REA evidence: x.a(java.lang.String, java.lang.String): boolean  (overload 1, status=complete) ====
+    @TargetApi(9)
+    public boolean a(String str, String str2) {
+        if (!d()) {
+            return false;
+        }
+        if (!b()) {
+            c();
+            if (!b()) {
+                return false;
+            }
+        }
+        try {
+            File file = new File(String.valueOf(p.f) + "/" + str);
+            file.createNewFile();
+            file.setReadable(true, true);
+            file.setWritable(true, true);
+            FileOutputStream fileOutputStream = new FileOutputStream(file);
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileOutputStream);
+            outputStreamWriter.append((CharSequence) str2);
+            outputStreamWriter.close();
+            fileOutputStream.close();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+// ==== REA evidence: x.a(java.lang.String[]): boolean  (overload 2, status=complete) ====
+    @TargetApi(9)
+    public boolean a(String[] strArr) {
+        boolean z = false;
+        boolean z2 = false;
+        for (int i = 0; i < strArr.length; i++) {
+            if (strArr[i].length() > 0) {
+                z2 = true;
+            }
+            if (i > 9) {
+                break;
+            }
+        }
+        if (!z2) {
+            return false;
+        }
+        String property = System.getProperty("line.separator");
+        try {
+            File file = new File(String.valueOf(p.f) + "/sbs.txt");
+            file.createNewFile();
+            file.setReadable(true, true);
+            file.setWritable(true, true);
+            FileOutputStream fileOutputStream = new FileOutputStream(file);
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileOutputStream);
+            for (int i2 = 0; i2 < strArr.length; i2++) {
+                outputStreamWriter.append((CharSequence) (String.valueOf(strArr[i2]) + property));
+                if (strArr[i2].length() == 0 || i2 > 9) {
+                    break;
+                }
+            }
+            outputStreamWriter.close();
+            fileOutputStream.close();
+            z = true;
+            return true;
+        } catch (Exception e) {
+            return z;
+        }
+    }
+
+// ==== REA evidence: x.a(): java.lang.String[]  (overload 3, status=complete) ====
+    public String[] a() {
+        int i = 0;
+        String[] strArr = new String[10];
+        for (int i2 = 0; i2 < strArr.length; i2++) {
+            strArr[i2] = "";
+        }
+        try {
+            FileInputStream fileInputStream = new FileInputStream(new File(String.valueOf(p.f) + "/sbs.txt"));
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream));
+            while (true) {
+                String line = bufferedReader.readLine();
+                if (line == null) {
+                    bufferedReader.close();
+                    fileInputStream.close();
+                    return strArr;
+                }
+                strArr[i] = line;
+                i++;
+            }
+        } catch (Exception e) {
+            return strArr;
+        }
+    }
+
+// ==== REA evidence: x.b(): boolean  (overload 0, status=complete) ====
+    private boolean b() {
+        if (!d()) {
+            return false;
+        }
+        try {
+            File file = new File(String.valueOf(this.a) + "/vipgameszone");
+            return file.exists() && file.isDirectory();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+// ==== REA evidence: x.b(java.lang.String): java.lang.String  (overload 1, status=complete) ====
+    public String b(String str) {
+        String str2 = "";
+        try {
+            File file = new File(String.valueOf(p.f) + "/" + str);
+            if (!file.exists()) {
+                return "";
+            }
+            FileInputStream fileInputStream = new FileInputStream(file);
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream));
+            while (true) {
+                String line = bufferedReader.readLine();
+                if (line == null) {
+                    bufferedReader.close();
+                    fileInputStream.close();
+                    return str2;
+                }
+                str2 = String.valueOf(str2) + line;
+            }
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+// ==== REA evidence: x.c(): boolean  (overload 0, status=complete) ====
+    @TargetApi(9)
+    private boolean c() {
+        if (!d()) {
+            return false;
+        }
+        try {
+            File file = new File(String.valueOf(this.a) + "/vipgameszone");
+            file.mkdir();
+            file.setReadable(true, false);
+            file.setWritable(true, false);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+// ==== REA evidence: x.?  (overload 0, status=) ====
+// REA: body not available (native/abstract)
+
+// ==== REA evidence: x.d(): boolean  (overload 0, status=complete) ====
+    private boolean d() {
+        return Environment.getExternalStorageState().equals("mounted");
+    }

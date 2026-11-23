@@ -1,0 +1,285 @@
+// ==== REA evidence: l.a(com.mygames.vgzseabattle.l): android.media.MediaPlayer  (overload 0, status=complete) ====
+// REA: body not available (native/abstract)
+
+// ==== REA evidence: l.a(): void  (overload 1, status=complete) ====
+    private void a() {
+        this.b = new Timer();
+        this.b.schedule(new m(this), 50L, 50L);
+    }
+
+// ==== REA evidence: l.a(int): void  (overload 2, status=complete) ====
+    private void a(int i) {
+        switch (i) {
+            case 0:
+                this.a = MediaPlayer.create(this.c, R.raw.sound_score_0);
+                break;
+            case 1:
+                this.a = MediaPlayer.create(this.c, R.raw.sound_score_1);
+                break;
+            case 2:
+                this.a = MediaPlayer.create(this.c, R.raw.sound_score_2);
+                break;
+            case 3:
+                this.a = MediaPlayer.create(this.c, R.raw.sound_score_3);
+                break;
+            case 4:
+                this.a = MediaPlayer.create(this.c, R.raw.sound_score_4);
+                break;
+            case 5:
+                this.a = MediaPlayer.create(this.c, R.raw.sound_score_5);
+                break;
+            case 6:
+                this.a = MediaPlayer.create(this.c, R.raw.sound_score_6);
+                break;
+            case 7:
+                this.a = MediaPlayer.create(this.c, R.raw.sound_score_7);
+                break;
+            case 8:
+                this.a = MediaPlayer.create(this.c, R.raw.sound_score_8);
+                break;
+            case 9:
+                this.a = MediaPlayer.create(this.c, R.raw.sound_score_9);
+                break;
+            case 10:
+                this.a = MediaPlayer.create(this.c, R.raw.sound_score_10);
+                break;
+            case 11:
+                this.a = MediaPlayer.create(this.c, R.raw.sound_score_11);
+                break;
+            case 12:
+                this.a = MediaPlayer.create(this.c, R.raw.sound_score_12);
+                break;
+            case 13:
+                this.a = MediaPlayer.create(this.c, R.raw.sound_score_13);
+                break;
+            case 14:
+                this.a = MediaPlayer.create(this.c, R.raw.sound_score_14);
+                break;
+            case 15:
+                this.a = MediaPlayer.create(this.c, R.raw.sound_score_15);
+                break;
+            case 16:
+                this.a = MediaPlayer.create(this.c, R.raw.sound_score_16);
+                break;
+            case 17:
+                this.a = MediaPlayer.create(this.c, R.raw.sound_score_17);
+                break;
+            case 18:
+                this.a = MediaPlayer.create(this.c, R.raw.sound_score_18);
+                break;
+            case 19:
+                this.a = MediaPlayer.create(this.c, R.raw.sound_score_19);
+                break;
+            case 20:
+                this.a = MediaPlayer.create(this.c, R.raw.sound_score_20);
+                break;
+            case 30:
+                this.a = MediaPlayer.create(this.c, R.raw.sound_score_30);
+                break;
+            case 40:
+                this.a = MediaPlayer.create(this.c, R.raw.sound_score_40);
+                break;
+            case 50:
+                this.a = MediaPlayer.create(this.c, R.raw.sound_score_50);
+                break;
+            case 60:
+                this.a = MediaPlayer.create(this.c, R.raw.sound_score_60);
+                break;
+            case 70:
+                this.a = MediaPlayer.create(this.c, R.raw.sound_score_70);
+                break;
+            case 80:
+                this.a = MediaPlayer.create(this.c, R.raw.sound_score_80);
+                break;
+            case 90:
+                this.a = MediaPlayer.create(this.c, R.raw.sound_score_90);
+                break;
+            case 100:
+                this.a = MediaPlayer.create(this.c, R.raw.sound_score_100);
+                break;
+            case 1000:
+                this.a = MediaPlayer.create(this.c, R.raw.sound_score_1000);
+                break;
+            case 1000000:
+                this.a = MediaPlayer.create(this.c, R.raw.sound_score_1000000);
+                break;
+            case 1000001:
+                this.a = MediaPlayer.create(this.c, R.raw.sound_say_final_score);
+                break;
+            case 1000002:
+                this.a = MediaPlayer.create(this.c, R.raw.sound_say_points);
+                break;
+        }
+    }
+
+// ==== REA evidence: l.a(boolean): void  (overload 3, status=complete) ====
+    public void a(boolean z) {
+        p.c = true;
+        b(z);
+        a(this.d[0]);
+        this.d[0] = -2;
+        this.a.start();
+        this.a.setOnCompletionListener(new o(this));
+    }
+
+// ==== REA evidence: l.b(): void  (overload 0, status=complete) ====
+    private void b() {
+        for (int i = 0; i < 20; i++) {
+            this.d[i] = -1;
+        }
+    }
+
+// ==== REA evidence: l.b(com.mygames.vgzseabattle.l): void  (overload 1, status=complete) ====
+// REA: body not available (native/abstract)
+
+// ==== REA evidence: l.b(boolean): void  (overload 2, status=complete) ====
+    private void b(boolean z) {
+        int i;
+        int i2;
+        int i3;
+        int i4;
+        int i5;
+        int i6;
+        int i7;
+        int i8;
+        int i9;
+        int i10;
+        int i11 = 1;
+        int i12 = p.b;
+        b();
+        if (i12 == 0) {
+            if (z) {
+                this.d[0] = 1000001;
+            } else {
+                i11 = 0;
+            }
+            this.d[i11] = 0;
+            this.d[i11 + 1] = 1000002;
+            return;
+        }
+        if (z) {
+            this.d[0] = 1000001;
+        } else {
+            i11 = 0;
+        }
+        int i13 = i12 / 1000000;
+        if (i13 > 0) {
+            int i14 = i12 - (i13 * 1000000);
+            int i15 = i13 / 100;
+            if (i15 > 0) {
+                int i16 = i13 - (i15 * 100);
+                this.d[i11] = i15;
+                int i17 = i11 + 1;
+                this.d[i17] = 100;
+                i7 = i17 + 1;
+                i8 = i16;
+            } else {
+                i7 = i11;
+                i8 = i13;
+            }
+            int i18 = i8 / 10;
+            if (i18 > 0) {
+                int i19 = i8 - (i18 * 10);
+                this.d[i7] = i18 * 10;
+                i9 = i7 + 1;
+                i10 = i19;
+            } else {
+                int i20 = i8;
+                i9 = i7;
+                i10 = i20;
+            }
+            if (i10 > 0 && i10 < 20) {
+                this.d[i9] = i10;
+                i9++;
+            }
+            this.d[i9] = 1000000;
+            i11 = i9 + 1;
+            i = i14;
+        } else {
+            i = i12;
+        }
+        int i21 = i / 1000;
+        if (i21 > 0) {
+            int i22 = i - (i21 * 1000);
+            int i23 = i21 / 100;
+            if (i23 > 0) {
+                this.d[i11] = i23;
+                int i24 = i11 + 1;
+                this.d[i24] = 100;
+                i3 = i24 + 1;
+                i4 = i21 - (i23 * 100);
+            } else {
+                i3 = i11;
+                i4 = i21;
+            }
+            int i25 = i4 / 10;
+            if (i25 > 0) {
+                int i26 = i4 - (i25 * 10);
+                this.d[i3] = i25 * 10;
+                i5 = i3 + 1;
+                i6 = i26;
+            } else {
+                int i27 = i4;
+                i5 = i3;
+                i6 = i27;
+            }
+            if (i6 > 0 && i6 < 20) {
+                this.d[i5] = i6;
+                i5++;
+            }
+            this.d[i5] = 1000;
+            i11 = i5 + 1;
+            i = i22;
+        }
+        int i28 = i / 100;
+        if (i28 > 0) {
+            i -= i28 * 100;
+            this.d[i11] = i28;
+            int i29 = i11 + 1;
+            this.d[i29] = 100;
+            i11 = i29 + 1;
+        }
+        if (i <= 0 || i >= 20) {
+            int i30 = i / 10;
+            if (i30 > 0) {
+                i -= i30 * 10;
+                this.d[i11] = i30 * 10;
+                i11++;
+            }
+            this.d[i11] = i;
+            i2 = i11 + 1;
+        } else {
+            this.d[i11] = i;
+            i2 = i11 + 1;
+        }
+        this.d[i2] = 1000002;
+    }
+
+// ==== REA evidence: l.c(): void  (overload 0, status=complete) ====
+    /* JADX INFO: Access modifiers changed from: private */
+    public void c() {
+        for (int i = 0; i < 20; i++) {
+            if (this.d[i] == -1) {
+                p.c = false;
+                return;
+            } else {
+                if (this.d[i] > -2) {
+                    a(this.d[i]);
+                    this.d[i] = -2;
+                    this.a.start();
+                    this.a.setOnCompletionListener(new n(this));
+                    return;
+                }
+            }
+        }
+    }
+
+// ==== REA evidence: l.?  (overload 0, status=) ====
+// REA: body not available (native/abstract)
+
+// ==== REA evidence: l.onCompletion(android.media.MediaPlayer): void  (overload 0, status=complete) ====
+    @Override // android.media.MediaPlayer.OnCompletionListener
+    public void onCompletion(MediaPlayer mediaPlayer) {
+        this.a.release();
+        c();
+    }

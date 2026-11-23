@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="drawable" name="ship1Bgrn">#fffff568</item>
+    <item type="drawable" name="ship2Bgrn">#fff26522</item>
+    <item type="drawable" name="emptyBgrn">#ffaab237</item>
+    <item type="drawable" name="startBgrn">#ff0054a6</item>
+    <item type="drawable" name="zastBgrn">#ff000b93</item>
+    <item type="drawable" name="mainBgrn">#ff00aeef</item>
+</resources>

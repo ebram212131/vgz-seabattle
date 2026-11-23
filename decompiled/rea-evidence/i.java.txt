@@ -1,0 +1,50 @@
+// ==== REA evidence: i.?  (overload 0, status=) ====
+// REA: body not available (native/abstract)
+
+// ==== REA evidence: i.run(): void  (overload 0, status=complete) ====
+    @Override // java.util.TimerTask, java.lang.Runnable
+    public void run() {
+        if (this.a.t) {
+            this.a.u++;
+            if (this.a.u <= 3) {
+            }
+            this.a.t = false;
+            this.a.h = false;
+        }
+        if (p.d) {
+            p.d = false;
+            this.a.h = false;
+        }
+        if (p.c) {
+            return;
+        }
+        if (this.a.s) {
+            this.a.s = false;
+            this.a.h = false;
+        }
+        if (!this.a.h) {
+            if (this.a.b[0] != 0 && this.a.c[0] == 0) {
+                AudioManager audioManager = (AudioManager) this.a.getSystemService("audio");
+                float streamVolume = audioManager.getStreamVolume(3) / audioManager.getStreamMaxVolume(3);
+                this.a.c[0] = this.a.a.play(this.a.b[0], streamVolume, streamVolume, 1, 10000, 1.0f);
+            }
+            this.a.h = true;
+        }
+        if (this.a.f) {
+            this.a.g++;
+            switch (this.a.g) {
+                case 1:
+                    this.a.t();
+                    break;
+                case 2:
+                    this.a.j();
+                    break;
+                case 3:
+                    this.a.k();
+                    break;
+                case 4:
+                    this.a.l();
+                    break;
+            }
+        }
+    }

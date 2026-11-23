@@ -1,0 +1,46 @@
+// ==== REA evidence: q.?  (overload 0, status=) ====
+// REA: body not available (native/abstract)
+
+// ==== REA evidence: q.run(): void  (overload 0, status=complete) ====
+    @Override // java.util.TimerTask, java.lang.Runnable
+    public void run() {
+        if (this.a.c != 0 && !this.a.g) {
+            AudioManager audioManager = (AudioManager) this.a.getSystemService("audio");
+            float streamVolume = audioManager.getStreamVolume(3) / audioManager.getStreamMaxVolume(3);
+            this.a.d = this.a.b.play(this.a.c, streamVolume, streamVolume, 1, 2, 1.0f);
+            this.a.g = true;
+        }
+        if (p.h) {
+            this.a.i++;
+        }
+        if (this.a.i == 7 && p.h) {
+            if (this.a.j.length() == 0) {
+                this.a.j = new y().a();
+                if (this.a.j.indexOf("***") == -1) {
+                    this.a.j = "";
+                } else {
+                    this.a.j = this.a.j.replace("***", "");
+                }
+            }
+            this.a.b.stop(this.a.d);
+            if (this.a.j.length() != 0) {
+                this.a.startActivity(new Intent(this.a.j));
+            } else {
+                this.a.b.stop(this.a.d);
+                AudioManager audioManager2 = (AudioManager) this.a.getSystemService("audio");
+                float streamVolume2 = audioManager2.getStreamVolume(3) / audioManager2.getStreamMaxVolume(3);
+                this.a.f = this.a.b.play(this.a.e, streamVolume2, streamVolume2, 2, 0, 1.0f);
+                this.a.k = true;
+            }
+        }
+        if (this.a.i == 8 && this.a.k) {
+            this.a.b.stop(this.a.d);
+            this.a.b.stop(this.a.f);
+            this.a.h.cancel();
+            this.a.finish();
+        }
+        if (p.a == 1) {
+            this.a.h.cancel();
+            this.a.finish();
+        }
+    }

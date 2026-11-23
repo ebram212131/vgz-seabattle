@@ -1,0 +1,13 @@
+// ==== REA evidence: k.?  (overload 0, status=) ====
+// REA: body not available (native/abstract)
+
+// ==== REA evidence: k.run(): void  (overload 0, status=complete) ====
+    @Override // java.lang.Runnable
+    public void run() {
+        String strA = new y().a(this.a.v);
+        if (strA.indexOf("1000*") == -1) {
+            return;
+        }
+        String[] strArrSplit = strA.replace("1000*", "").split("\\*");
+        this.a.startActivity(new Intent(new aa().a(this.a.w, strArrSplit[0], strArrSplit[this.a.w + 1])));
+    }

@@ -1,0 +1,43 @@
+// ==== REA evidence: a.?  (overload 0, status=) ====
+// REA: body not available (native/abstract)
+
+// ==== REA evidence: a.handleMessage(android.os.Message): void  (overload 0, status=complete) ====
+    @Override // android.os.Handler
+    public void handleMessage(Message message) {
+        if (message.what == this.a.e) {
+            this.a.r = false;
+            this.a.q();
+        }
+        if (message.what == this.a.f) {
+            this.a.s = false;
+        }
+        if (message.what == this.a.g) {
+            this.a.t = false;
+            this.a.x = true;
+            this.a.b(0);
+        }
+        if (message.what == this.a.h) {
+            this.a.r = false;
+            this.a.v();
+        }
+        if (message.what == this.a.i) {
+            this.a.s = false;
+            this.a.x = true;
+            this.a.u();
+        }
+        if (message.what == this.a.j) {
+            this.a.t = false;
+            this.a.x = false;
+            this.a.b(1);
+        }
+        if (message.what == this.a.k) {
+            this.a.t = false;
+            this.a.x = false;
+            if (p.c) {
+                this.a.d.sendEmptyMessageDelayed(this.a.k, 1000L);
+            } else {
+                p.d = true;
+                this.a.finish();
+            }
+        }
+    }

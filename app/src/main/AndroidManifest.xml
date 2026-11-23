@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    android:versionCode="4"
+    android:versionName="2.1">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:smallScreens="true"
+        android:resizeable="true"
+        android:xlargeScreens="true" />
+
+    <application
+        android:name=".VgzApp"
+        android:theme="@style/AppTheme"
+        android:label="@string/app_name"
+        android:icon="@drawable/ic_launcher">
+
+        <activity
+            android:label="@string/vgz_sea_battle"
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:label="@string/sea_battle_menu"
+            android:name=".ActivityMenu"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.mygames.vgzseabattle.ActivityMenu" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:label="@string/sea_battle_game_screen"
+            android:name=".ActivityGameScreen"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.mygames.vgzseabattle.ActivityGameScreen" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:label="@string/sea_battle_learn_sounds"
+            android:name=".ActivityLearnSounds"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.mygames.vgzseabattle.ActivityLearnSounds" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:label="@string/sea_battle_learn_game_screen"
+            android:name=".ActivityLearnScreen"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.mygames.vgzseabattle.ActivityLearnScreen" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:label="Sea Battle your top 10 score"
+            android:name=".ActivityViewTop"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.mygames.vgzseabattle.ActivityViewTop" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:label="Sea Battle registration screen"
+            android:name=".RegisterApp"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.mygames.vgzseabattle.RegisterApp" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:label="Sea Battle settings"
+            android:name=".SettingsActivity"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.mygames.vgzseabattle.SettingsActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

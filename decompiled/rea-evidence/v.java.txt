@@ -1,0 +1,14 @@
+// ==== REA evidence: v.a(): java.lang.String  (overload 0, status=complete) ====
+/* JADX INFO: loaded from: classes.dex */
+public class v {
+    public String a() {
+        return new StringBuilder().append(Long.valueOf(Calendar.getInstance().getTimeInMillis())).toString();
+    }
+
+// ==== REA evidence: v.a(android.content.Context): void  (overload 1, status=complete) ====
+    public void a(Context context) {
+        p.f = context.getApplicationContext().getPackageManager().getPackageInfo(context.getPackageName(), 0).applicationInfo.dataDir;
+    }
+
+// ==== REA evidence: v.?  (overload 0, status=) ====
+// REA: body not available (native/abstract)

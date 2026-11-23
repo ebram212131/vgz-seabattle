@@ -1,0 +1,143 @@
+// ==== REA evidence: ActivityViewTop.a(): void  (overload 0, status=complete) ====
+    private void a() {
+        this.a = (Button) findViewById(R.id.buttonTop10Score1);
+        this.b = (Button) findViewById(R.id.buttonTop10Score2);
+        this.c = (Button) findViewById(R.id.buttonTop10Score3);
+        this.d = (Button) findViewById(R.id.buttonTop10Score4);
+        this.e = (Button) findViewById(R.id.buttonTop10Score5);
+        this.f = (Button) findViewById(R.id.buttonTop10Score6);
+        this.g = (Button) findViewById(R.id.buttonTop10Score7);
+        this.h = (Button) findViewById(R.id.buttonTop10Score8);
+        this.i = (Button) findViewById(R.id.buttonTop10Score9);
+        this.j = (Button) findViewById(R.id.buttonTop10Score10);
+        this.k = (Button) findViewById(R.id.buttonTop10ReturnToMenu);
+        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) this.a.getLayoutParams();
+        layoutParams.height = this.l;
+        this.a.setLayoutParams(layoutParams);
+        this.a.setOnTouchListener(this);
+        RelativeLayout.LayoutParams layoutParams2 = (RelativeLayout.LayoutParams) this.b.getLayoutParams();
+        layoutParams2.height = this.l;
+        this.b.setLayoutParams(layoutParams2);
+        this.b.setOnTouchListener(this);
+        RelativeLayout.LayoutParams layoutParams3 = (RelativeLayout.LayoutParams) this.c.getLayoutParams();
+        layoutParams3.height = this.l;
+        this.c.setLayoutParams(layoutParams3);
+        this.c.setOnTouchListener(this);
+        RelativeLayout.LayoutParams layoutParams4 = (RelativeLayout.LayoutParams) this.d.getLayoutParams();
+        layoutParams4.height = this.l;
+        this.d.setLayoutParams(layoutParams4);
+        this.d.setOnTouchListener(this);
+        RelativeLayout.LayoutParams layoutParams5 = (RelativeLayout.LayoutParams) this.e.getLayoutParams();
+        layoutParams5.height = this.l;
+        this.e.setLayoutParams(layoutParams5);
+        this.e.setOnTouchListener(this);
+        RelativeLayout.LayoutParams layoutParams6 = (RelativeLayout.LayoutParams) this.f.getLayoutParams();
+        layoutParams6.height = this.l;
+        this.f.setLayoutParams(layoutParams6);
+        this.f.setOnTouchListener(this);
+        RelativeLayout.LayoutParams layoutParams7 = (RelativeLayout.LayoutParams) this.g.getLayoutParams();
+        layoutParams7.height = this.l;
+        this.g.setLayoutParams(layoutParams7);
+        this.g.setOnTouchListener(this);
+        RelativeLayout.LayoutParams layoutParams8 = (RelativeLayout.LayoutParams) this.h.getLayoutParams();
+        layoutParams8.height = this.l;
+        this.h.setLayoutParams(layoutParams8);
+        this.h.setOnTouchListener(this);
+        RelativeLayout.LayoutParams layoutParams9 = (RelativeLayout.LayoutParams) this.i.getLayoutParams();
+        layoutParams9.height = this.l;
+        this.i.setLayoutParams(layoutParams9);
+        this.i.setOnTouchListener(this);
+        RelativeLayout.LayoutParams layoutParams10 = (RelativeLayout.LayoutParams) this.j.getLayoutParams();
+        layoutParams10.height = this.l;
+        this.j.setLayoutParams(layoutParams10);
+        this.j.setOnTouchListener(this);
+        RelativeLayout.LayoutParams layoutParams11 = (RelativeLayout.LayoutParams) this.k.getLayoutParams();
+        layoutParams11.height = this.l;
+        this.k.setLayoutParams(layoutParams11);
+        this.k.setOnTouchListener(this);
+    }
+
+// ==== REA evidence: ActivityViewTop.a(int): void  (overload 1, status=complete) ====
+    private void a(int i) {
+        if (p.e != null) {
+            p.b = p.e.a(i);
+            this.m.a(false);
+        }
+    }
+
+// ==== REA evidence: ActivityViewTop.?  (overload 0, status=) ====
+// REA: body not available (native/abstract)
+
+// ==== REA evidence: ActivityViewTop.onCreate(android.os.Bundle): void  (overload 0, status=complete) ====
+    @Override // android.app.Activity
+    public void onCreate(Bundle bundle) {
+        super.onCreate(bundle);
+        setContentView(R.layout.activity_view_top);
+        getWindow().addFlags(1024);
+        this.l = ((WindowManager) getSystemService("window")).getDefaultDisplay().getHeight();
+        this.l /= 12;
+        a();
+        this.m = new l(this);
+    }
+
+// ==== REA evidence: ActivityViewTop.onStop(): void  (overload 0, status=complete) ====
+    @Override // android.app.Activity
+    public void onStop() {
+        p.d = true;
+        finish();
+        super.onStop();
+    }
+
+// ==== REA evidence: ActivityViewTop.onTouch(android.view.View, android.view.MotionEvent): boolean  (overload 0, status=complete) ====
+    @Override // android.view.View.OnTouchListener
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        if (p.c || motionEvent.getAction() != 0) {
+            return false;
+        }
+        if (view == this.a) {
+            a(0);
+            return true;
+        }
+        if (view == this.b) {
+            a(1);
+            return true;
+        }
+        if (view == this.c) {
+            a(2);
+            return true;
+        }
+        if (view == this.d) {
+            a(3);
+            return true;
+        }
+        if (view == this.e) {
+            a(4);
+            return true;
+        }
+        if (view == this.f) {
+            a(5);
+            return true;
+        }
+        if (view == this.g) {
+            a(6);
+            return true;
+        }
+        if (view == this.h) {
+            a(7);
+            return true;
+        }
+        if (view == this.i) {
+            a(8);
+            return true;
+        }
+        if (view == this.j) {
+            a(9);
+            return true;
+        }
+        if (view != this.k) {
+            return false;
+        }
+        p.d = true;
+        finish();
+        return true;
+    }
