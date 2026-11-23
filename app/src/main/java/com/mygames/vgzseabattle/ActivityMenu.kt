@@ -1,6 +1,7 @@
 package com.mygames.vgzseabattle
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.MotionEvent
@@ -359,13 +360,41 @@ class ActivityMenu : Activity(), View.OnTouchListener {
         goOffline(ACTION_SETTINGS)
     }
 
-    /** Original s(): quit. */
+    /**
+     * Original s(): quit. v3.0 CHANGE (owner request: "ask me a question before
+     * exiting"): neither the Quit button nor the system Back key on the menu
+     * exits silently any more - both ask for confirmation first. Yes runs the
+     * original quit flow (stop music, press sound, quitRequested = 1, finish);
+     * No keeps the app open. MainActivity still sees quitRequested == 1 and
+     * finishes itself, exactly like the pre-v3.0 flow. TalkBack reads the
+     * standard dialog natively.
+     */
     private fun quitGame() {
-        FileLogger.i(TAG, "-> quitGame")
-        stopBackgroundMusic()
+        FileLogger.i(TAG, "-> quitGame: asking quit confirmation")
         pressSound()
+        AlertDialog.Builder(this)
+            .setTitle("Quit")
+            .setMessage("Do you really want to quit the game?")
+            .setPositiveButton("Yes") { _, _ -> reallyQuit() }
+            .setNegativeButton("No") { _, _ -> }
+            .create()
+            .show()
+    }
+
+    /** Original quit body (was quitGame before v3.0). */
+    private fun reallyQuit() {
+        FileLogger.i(TAG, "-> reallyQuit")
+        stopBackgroundMusic()
         GlobalState.quitRequested = 1
         finish()
+    }
+
+    /**
+     * v3.0: Back on the main menu no longer exits silently (the old onStop
+     * auto-quit); it opens the same quit confirmation as the Quit button.
+     */
+    override fun onBackPressed() {
+        quitGame()
     }
 
     /** Original t(): stop background music. */

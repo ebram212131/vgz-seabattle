@@ -125,6 +125,7 @@ $SDK/build-tools/35.0.0/apksigner verify --print-certs \
 | 2.2.1-diag | 8 | Diagnostic-only build (never committed; extra window-inset logs). Confirmed healthy layout on Android 16 / SM-S721B. |
 | 2.2.2   | 9    | Register gated by the Settings online checkbox (+ audio cues), tighter HTTP timeouts, TalkBack tweaks, NEW Play-compliant release keystore |
 | 2.2.3   | 10   | THE TalkBack fix: menus/game grid/settings/register buttons now respond to TalkBack double-tap (every interactive view got an OnClickListener; onTouch consumes events to prevent double-fire) |
+| 3.0     | 11   | Back key inside a running game reopens the "Choose the screen" chooser instead of exiting (owner report); "Stop game" and menu Quit/Back now ask for confirmation before exiting (owner request); engine core untouched |
 
 ## TalkBack / accessibility ground rules (owner requirement)
 

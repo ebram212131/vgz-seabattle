@@ -207,11 +207,35 @@ class ActivityGameScreen : Activity(), View.OnTouchListener, SeaBattleEngine.Lis
 
     // --------------------------------------------------------------- dialogs
 
-    /** Original i(): initial screen chooser. */
-    private fun showScreenDialog() {
-        AlertDialog.Builder(this)
+    /**
+     * Original i(): initial screen chooser.
+     *
+     * v3.0 FIX (owner report: "when I press back on my screen / enemy screen
+     * it exits the game completely - it must return to the choose-your-screen"):
+     * the chooser is now also reopened by the system Back key mid-game
+     * (midGame = true). The initial chooser keeps the original restart
+     * semantics (fresh fleets are placed); the mid-game chooser only switches
+     * the visible screen and never touches the running game - the same
+     * semantics as the "Show my/opponent screen" items of the in-game menus.
+     */
+    private fun showScreenDialog(midGame: Boolean = false) {
+        val builder = AlertDialog.Builder(this)
             .setTitle("Choose the screen")
-            .setItems(arrayOf("Show my screen", "Show opponent screen")) { _, which ->
+        if (midGame) {
+            builder.setItems(arrayOf("Show my screen", "Show opponent screen")) { _, which ->
+                when (which) {
+                    0 -> {
+                        engine.showScreen(SeaBattleEngine.SCREEN_MY)
+                        playMenuSound()
+                    }
+                    1 -> {
+                        engine.showScreen(SeaBattleEngine.SCREEN_OPPONENT)
+                        playMenuSound()
+                    }
+                }
+            }
+        } else {
+            builder.setItems(arrayOf("Show my screen", "Show opponent screen")) { _, which ->
                 when (which) {
                     0 -> {
                         resetForNewGame()
@@ -225,6 +249,23 @@ class ActivityGameScreen : Activity(), View.OnTouchListener, SeaBattleEngine.Lis
                     }
                 }
             }
+        }
+        builder.create().show()
+    }
+
+    /**
+     * v3.0 (owner request: "ask me a question before exiting the game"): the
+     * Stop game menu item first asks for confirmation. Yes runs the original
+     * finish-by-stop flow (score zeroed, final score spoken, exit to menu);
+     * No keeps playing. TalkBack reads the standard dialog natively.
+     */
+    private fun confirmStopGame() {
+        playMenuSound()
+        AlertDialog.Builder(this)
+            .setTitle("Stop game")
+            .setMessage("Do you really want to stop the game and exit?")
+            .setPositiveButton("Yes") { _, _ -> engine.finishByStop() }
+            .setNegativeButton("No") { _, _ -> }
             .create()
             .show()
     }
@@ -244,10 +285,7 @@ class ActivityGameScreen : Activity(), View.OnTouchListener, SeaBattleEngine.Lis
                         showMyHelp()
                         playMenuSound()
                     }
-                    3 -> {
-                        engine.finishByStop()
-                        playMenuSound()
-                    }
+                    3 -> confirmStopGame()
                 }
             }
             .create()
@@ -269,10 +307,7 @@ class ActivityGameScreen : Activity(), View.OnTouchListener, SeaBattleEngine.Lis
                         showOpponentHelp()
                         playMenuSound()
                     }
-                    3 -> {
-                        engine.finishByStop()
-                        playMenuSound()
-                    }
+                    3 -> confirmStopGame()
                 }
             }
             .create()
@@ -451,6 +486,25 @@ class ActivityGameScreen : Activity(), View.OnTouchListener, SeaBattleEngine.Lis
         } else {
             engine.tapOpponentCell(r, c)
         }
+    }
+
+    /**
+     * v3.0 FIX (owner report: "back on my screen / enemy screen exits the game
+     * completely - it must return to the choose-your-screen"): the system Back
+     * key no longer leaves a running game. It reopens the screen chooser
+     * dialog, exactly like at game start. A finished game may still leave with
+     * Back (the engine already scheduled its own auto-exit with the final
+     * score), and Back is ignored while a shot or a screen transition is still
+     * resolving so the engine state cannot be corrupted mid-animation.
+     */
+    override fun onBackPressed() {
+        if (engine.gameOver) {
+            super.onBackPressed()
+            return
+        }
+        if (locked()) return
+        playMenuSound()
+        showScreenDialog(midGame = true)
     }
 
     override fun onTouch(view: View?, event: MotionEvent?): Boolean {
