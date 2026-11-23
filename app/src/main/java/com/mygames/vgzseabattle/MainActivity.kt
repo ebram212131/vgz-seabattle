@@ -232,6 +232,7 @@ class MainActivity : Activity(), View.OnTouchListener {
         unreachableDialogShown = true
         FileLogger.w(TAG, "reporting: server is not reachable")
         if (errorSoundId != 0) {
+            FileLogger.i(TAG, "about to play server-unreachable error sound")
             soundBoard?.let { errorStream = it.play(1, 2) }
         }
         val builder = AlertDialog.Builder(this)
@@ -270,8 +271,22 @@ class MainActivity : Activity(), View.OnTouchListener {
     /** Original q.java timer task. */
     private inner class SplashTicker : java.util.TimerTask() {
         override fun run() {
+            // CRASH-SAFETY: SplashTicker runs on a java.util.Timer thread. An
+            // uncaught exception here would kill that thread and, via the
+            // default handler, the process. Wrap the whole tick so a failure
+            // (e.g. inside SoundBoard, now itself defensive) is logged and the
+            // timer keeps ticking instead of tearing the app down.
+            try {
+                tickBody()
+            } catch (t: Throwable) {
+                FileLogger.e(TAG, "SplashTicker crashed", t)
+            }
+        }
+
+        private fun tickBody() {
             val sb = soundBoard ?: return
             if (introSoundId != 0 && !introPlayed) {
+                FileLogger.i(TAG, "splash tick $tick: about to play intro sound")
                 introStream = sb.playStereo(0, sb.volume(), sb.volume(), 1, loop = 2)
                 introPlayed = true
             }

@@ -141,6 +141,19 @@ class ActivityMenu : Activity(), View.OnTouchListener {
 
     private inner class MenuHeartbeat : java.util.TimerTask() {
         override fun run() {
+            // CRASH-SAFETY: MenuHeartbeat runs on a java.util.Timer thread and
+            // drives the background music loop; an uncaught exception here would
+            // kill the process. Wrap the body so a failure is logged and the
+            // heartbeat keeps running instead of tearing the app down. (Every
+            // sb.* call is itself defensive in SoundBoard and logged there.)
+            try {
+                heartbeatBody()
+            } catch (t: Throwable) {
+                FileLogger.e(TAG, "MenuHeartbeat crashed", t)
+            }
+        }
+
+        private fun heartbeatBody() {
             val sb = sound ?: return
             if (musicPauseOnce) {
                 pauseCounter++

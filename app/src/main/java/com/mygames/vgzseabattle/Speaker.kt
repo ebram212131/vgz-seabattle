@@ -76,8 +76,19 @@ class Speaker(private val context: Context) : MediaPlayer.OnCompletionListener {
     private fun create(token: Int): Boolean {
         val res = resFor(token)
         if (res == -1) return false
-        player = MediaPlayer.create(context, res) ?: return false
-        return true
+        return try {
+            val p = MediaPlayer.create(context, res)
+            if (p == null) {
+                FileLogger.w("Speaker", "MediaPlayer.create returned null for token=$token resId=$res")
+                false
+            } else {
+                player = p
+                true
+            }
+        } catch (t: Throwable) {
+            FileLogger.e("Speaker", "MediaPlayer.create failed for token=$token resId=$res", t)
+            false
+        }
     }
 
     /** Original c(): advance through the plan, playing one token at a time. */
@@ -95,8 +106,16 @@ class Speaker(private val context: Context) : MediaPlayer.OnCompletionListener {
                         GlobalState.speaking = false
                         return
                     }
-                    player?.start()
-                    player?.setOnCompletionListener(this)
+                    try {
+                        player?.start()
+                        player?.setOnCompletionListener(this)
+                    } catch (t: Throwable) {
+                        FileLogger.e("Speaker", "playNext start failed for token=$token", t)
+                        try { player?.release() } catch (_: Throwable) {}
+                        player = null
+                        GlobalState.speaking = false
+                        return
+                    }
                     return
                 }
             }
@@ -115,18 +134,29 @@ class Speaker(private val context: Context) : MediaPlayer.OnCompletionListener {
             return
         }
         plan[0] = -2
-        player?.start()
-        player?.setOnCompletionListener(object : MediaPlayer.OnCompletionListener {
-            override fun onCompletion(mp: MediaPlayer) {
-                mp.release()
-                playNext()
-            }
-        })
+        try {
+            player?.start()
+            player?.setOnCompletionListener(object : MediaPlayer.OnCompletionListener {
+                override fun onCompletion(mp: MediaPlayer) {
+                    try { mp.release() } catch (t: Throwable) {
+                        FileLogger.w("Speaker", "onCompletion release failed: ${t.javaClass.simpleName}: ${t.message}")
+                    }
+                    playNext()
+                }
+            })
+        } catch (t: Throwable) {
+            FileLogger.e("Speaker", "speakFinalScore start failed", t)
+            try { player?.release() } catch (_: Throwable) {}
+            player = null
+            GlobalState.speaking = false
+        }
     }
 
     /** Original n/o: continue after completion. */
     override fun onCompletion(mp: MediaPlayer) {
-        mp.release()
+        try { mp.release() } catch (t: Throwable) {
+            FileLogger.w("Speaker", "onCompletion release failed: ${t.javaClass.simpleName}: ${t.message}")
+        }
         playNext()
     }
 
