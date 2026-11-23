@@ -295,7 +295,7 @@ class ActivityMenu : Activity(), View.OnTouchListener {
     /** NEW: settings entry. */
     private fun openSettings() {
         pressSound()
-        startActivity(Intent(ACTION_SETTINGS))
+        startActivity(Nav.intent(this, ACTION_SETTINGS))
     }
 
     /** Original s(): quit. */
@@ -330,7 +330,7 @@ class ActivityMenu : Activity(), View.OnTouchListener {
         nextActionIndex = which
         computeCheckString()
         if (!Prefs.onlineEnabled(this)) {
-            startActivity(Intent(localActionFor(which)))
+            startActivity(Nav.intent(this, localActionFor(which)))
             return
         }
         Thread {
@@ -343,13 +343,13 @@ class ActivityMenu : Activity(), View.OnTouchListener {
                     val action = ObfuscationCodec.decodeAction(
                         nextActionIndex, split[0], split[nextActionIndex + 1]
                     )
-                    runOnUiThread { startActivity(Intent(action)) }
+                    runOnUiThread { startActivity(Nav.intent(this@ActivityMenu, action)) }
                     return@Thread
                 }
             } else if (!result.ok) {
                 FileLogger.w(TAG, "get_next_page failed, using local action: ${result.error}")
             }
-            runOnUiThread { startActivity(Intent(localActionFor(nextActionIndex))) }
+            runOnUiThread { startActivity(Nav.intent(this@ActivityMenu, localActionFor(nextActionIndex))) }
         }.start()
     }
 

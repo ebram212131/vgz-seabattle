@@ -145,7 +145,7 @@ class RegisterApp : Activity(), View.OnTouchListener {
             finish()
         } else {
             GlobalState.menuPhase = 0
-            startActivity(Intent(action))
+            startActivity(Nav.intent(this, action))
         }
     }
 

@@ -265,7 +265,7 @@ class MainActivity : Activity(), View.OnTouchListener {
             it.stop(0)
             it.stop(1)
         }
-        startActivity(Intent(action))
+        startActivity(Nav.intent(this, action))
     }
 
     /** Original q.java timer task. */
